@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:download.openmmlab.com)",
+      "Bash(fi)",
+      "Bash(done)",
+      "Bash(python3:*)",
+      "Read(//Users/gilrubin/dev/Paidevo-questionnaire/frontend/src/components/**)",
+      "Read(//Users/gilrubin/dev/Paidevo-questionnaire/frontend/src/pages/**)"
+    ]
+  }
+}

@@ -1,0 +1,331 @@
+[Slide 1] 
+
+
+The Digital Handshake: SAP & Coupa Goods Receipt Tutorial 
+Hey there! Welcome to your crash course on the "Digital Handshake." Ever wonder when a 
+delivery truly *counts* for the company's books? It's not just when the box lands on your desk! 
+This course will show you how to turn that physical box into a digital checkmark, making sure 
+everything is recorded properly. 
+
+
+[Slide 1.1] 
+
+
+What you'll gain: 
+
+
+* You'll know exactly how to officially record a delivery. 
+* You'll help make sure vendors get paid on time. 
+* You'll learn how your actions prevent costly financial mistakes. 
+
+[Slide 2] The Reality vs. The Trigger 
+When does the company actually 'own' the goods? 
+
+
+Physical vs. Financial: 
+You received a box! It's right there, physically on your desk. But for the company's money 
+records, it doesn't officially exist yet. Think of it like a sports game: you have the ball (physical 
+delivery), but it doesn't officially count for the score until you *make the shot* (digital Goods 
+Receipt action). Without that shot, the scorekeeper never sees it! 
+
+
+The Trigger: Your Action -> Its Impact 
+The big change from "a box on a desk" to "what the company officially owes or owns on paper" 
+happens when you take a specific digital action: the Goods Receipt (GR). This digital entry is 
+your "Trigger." Without it, the delivery is invisible to Accounting. No one knows the company 
+should pay for it. 
+
+
+Look at the image of the box on the desk. Without the 'Truck Icon' clicked, can the company 
+*see* it on its financial scoreboard? (Think about the difference!) 
+
+
+[Slide 3] 
+The 4-Step Integration Cycle 
+Your Mission Map: The Digital Journey 
+To understand how this all works, think of it as building a sturdy bridge: each step is a crucial 
+part you add, connecting the physical world to the financial record. Refer to the diagram on the 
+slide – it's your map for these steps! 
+
+
+Here are the key phases of your digital journey: 
+
+
+1. The Trigger: This is the important *action you take* in Coupa that starts everything. 
+2. The Correction: If you make a mistake, you'll learn how to *fix it safely* to keep clear 
+records. 
+3. The Bridge: Data doesn't instantly teleport! It moves between systems through a *5-minute 
+sync cycle*. 
+4. The Proof: The final confirmation happens in SAP, showing the *official financial truth*. 
+Can you quickly visualize what happens in each of these four main parts? 
+
+
+
+[Slide 4] 
+
+Step 1: Initiating the Receipt in Coupa 
+Your First Action: Start the Digital Receipt 
+We begin in Coupa, our main online system. 
+
+
+Your Task: 
+
+
+1. *Log in* to Coupa. 
+2. *Find* your specific Purchase Order (PO) in the 'Activity' section. 
+3. *Click* the Truck Icon. Think of the 'Truck Icon' as your 'Go!' button – the moment you press 
+it, the digital receipt process begins! This is your key to unlocking the receiving page. 
+Did you spot the 'Truck Icon' in your mind? It's your key to unlocking the next step! 
+
+
+[Slide 5] Step 2: Quantity & The ‘Tolerance’ Risk 
+Your Entry, Your Impact: Avoiding Phantom Inventory 
+Once you click the Truck Icon, you'll go to the "Receiving Entry" screen. 
+
+
+Your Task: 
+
+
+1. *Enter* the Receipt Date. Make sure this matches when the goods actually arrived. 
+2. *Type* the Quantity Received. If you got 5 but ordered 10, just enter 5. 
+What happens if you make a mistake? 
+Currently, our system has No Tolerance Set. This means if you ordered 5 laptops but 
+accidentally type "6" in the quantity field, the system will currently accept it. 
+
+
+Consequence: This creates "Phantom Inventory." Entering '6' when you received '5' is like 
+telling your friends you have an extra pizza slice that *doesn't actually exist* for the party. It's a 
+'Phantom Pizza' – on paper, but nowhere to be found! This creates a financial liability for an 
+item that isn't real. 
+
+
+Your Personal Safeguard (Best Practice): 
+Always *double-check by physically counting* the boxes next to you against the Purchase Order 
+quantity before you click submit. Your eyes are the best defense! Don't rely on the system to 
+stop you. 
+
+
+Imagine you're physically counting boxes. If you accidentally type the wrong number, what 
+'ghostly' problem could you create? 
+
+
+[Slide 6] 
+Made a Mistake? Don’t Delete. Void. 
+Your Correction Power: Fix Mistakes Safely 
+Human error happens! You might enter the wrong quantity or receive the wrong Purchase 
+Order. 
+
+
+Golden Rule: Never Delete, Always Void! 
+In financial systems, we never just "delete" history as if it never happened. Think of it like 
+writing in a notebook: Deleting is like ripping a page out – it's gone forever, no one knows what 
+
+
+
+happened. Voiding is like drawing a neat, clear line through the error and writing the correction 
+next to it – the original mistake is still there, but you know it's fixed, and you can still see the 
+whole story! 
+
+
+Your Action: 
+
+
+1. If you made an error, *find* the receipt in your history. 
+2. *Select* "Void Receipt." 
+Your Result: This action creates a "Void Consumption" document. It's like a special negative 
+entry that makes the numbers balance out in the ledger, but it keeps a clear record that an 
+error happened and was fixed. This preserves the trail for any questions later. 
+
+
+Which action lets you retrace your steps later, like following a trail: deleting or voiding? 
+
+
+[Slide 7] Why ‘Void’ Instead of ‘Delete’? 
+Why is 'Voiding' the Smart Choice for an Audit? 
+Why do we do this "Void Consumption" thing? Because financial systems need a perfect Audit 
+Trail. Imagine you're leaving breadcrumbs on a trail (voiding) versus sweeping your tracks clean 
+(deleting). If an auditor (a detective for money!) comes along, which trail helps them find their 
+way back to what happened? Voiding gives them the 'breadcrumbs'! 
+
+
+Here’s the difference: 
+
+
+* Deleting: Erases history. It hides the mistake. If an auditor asks, "What happened here?", 
+there is no record, just a blank space. 
+* Voiding: Keeps a record of the error (+5 units) and the immediate correction (-5 units). It 
+shows the full, honest story. 
+Key Term: Void Consumption. Remember this! It’s the sign of a clear, transparent way to fix 
+mistakes. 
+
+
+Picture yourself as the auditor. Which record (deleted or voided) would give you the complete, 
+honest story? 
+
+
+[Slide 8] 
+
+The 5-Minute Heartbeat 
+The Digital Delay: Why You Must Wait 
+After you submit your receipt (or the void) in Coupa, you might want to check SAP immediately. 
+But hold on! 
+
+
+Why the Wait? 
+Coupa and SAP are separate systems. They don't update instantly. The 5-minute sync cycle is 
+like baking a cake – you can't open the oven door every second to check if it's done! You have 
+to wait for the system to 'bake' your entry before it's ready in SAP. 
+
+
+Your Rule: 
+* *Wait at least 5 minutes* after submitting in Coupa before checking SAP. 
+
+
+
+Your Confirmation: 
+If you check too early, the record won't be there. You are waiting for the system to generate a 
+Material Document Number (a unique ID usually starting with 5000). It's like seeing the 'Done!' 
+light on the oven. 
+
+
+Set a mental timer! What happens if you check SAP too soon, before the 'cake' is baked? 
+
+
+[Slide 9] 
+
+Step 3: Verifying the Truth in SAP 
+Your Destination: Finding the Financial Truth 
+Once the 5 minutes have passed, we move to SAP to verify the "Financial Truth." 
+
+
+Your Goal: 
+We are looking for the 'Material Document'. This is the ultimate, official proof for Accounting 
+that the liability is recognized. 
+
+
+Your Navigation Steps: 
+
+
+1. *Open* the Purchase Order (PO) in SAP. 
+2. *Go to* the Item Details view (the bottom section of the screen). 
+3. *Click* on the Purchase Order History tab. 
+Think of this tab as your financial 'Bank Statement' – it's literally where the company's money 
+'speaks' the truth about the delivery! It proves the transaction actually cleared. 
+
+
+Close your eyes and 'walk' through those clicks in your mind. Where do you arrive, and what do 
+you expect to see? 
+
+
+[Slide 10] 
+
+Decoding the SAP Record 
+Your Verification Mission: Confirm the Details 
+Inside the Purchase Order History tab, you'll see a grid of data. You need to verify three specific 
+things to make sure everything is accurate: 
+
+
+Your Tasks: 
+
+
+1. *Find* the MvT (Movement Type): Look for the code 101. This is the standard SAP code for a 
+Goods Receipt. Think of MvT 101 as the 'Goods Received' *stamp* – it tells you exactly what 
+happened. 
+2. *Find* the Mat. Doc. (Material Document): This is the unique ID number generated by SAP 
+(e.g., 5000028491). The Mat. Doc. is like the delivery's *unique ID card*. 
+3. *Verify* the Quantity: Check that the amount listed here matches exactly what you entered 
+in Coupa. 
+Look at the image on the slide. Can you quickly point to each of these three key pieces of 
+information? 
+
+
+[Slide 11] Connecting the Dots 
+
+
+
+Your Detective Work: Find the Coupa Connection 
+Your Problem: How do we know which SAP entry matches which Coupa action, especially if 
+there are multiple receipts? 
+
+
+Your Solution: 
+
+
+1. *Click* the Material Document number (the 5000... number) to open the document details. 
+2. *Look* at the 'Header Text' field. 
+Your Proof (The Link): The integration automatically copies the original Coupa GR Number into 
+the SAP Header Text. This is like attaching a tiny *GPS tracker* (your Coupa GR Number) to 
+your SAP record. If anyone ever asks, 'Where did this SAP entry come from?', you can easily 
+*click and show them the GPS tracker* in the 'Header Text'! This permanently links the two 
+systems. If you are ever audited, this is your secret weapon to trace the path back to the origin. 
+
+
+Imagine you're a detective. What's the one 'clue' you'd look for to connect Coupa and SAP? 
+
+
+[Slide 12] The Dictionary of “Goods Receipt” 
+Your Quick Reference Guide to Key Terms in Action 
+Before we finish, let’s make sure these key terms are locked in your memory. 
+
+
+Term - What It Is / What It Does (Think of it as...) 
+
+
+* Requester - You are the 'starter' of the digital handshake – the one who says, 'I received it!' 
+* Truck Icon - The *big button* you push in Coupa to begin the receiving workflow. 
+* Material Document - The official "Proof of Receipt" generated in SAP (starts with 5000). 
+* Void Consumption -The 'undo with a traceable line' – fixing a mistake while keeping a 
+record. 
+* Integration - The 5-minute heartbeat that synchronizes data between the two systems. 
+Can you quickly explain each of these terms in your own words, or even with a hand gesture 
+that shows what it means? 
+
+
+[Slide 13] 
+
+Do You Have Conceptual-Practical Understanding? 
+Your Mission Debrief: Prove Your Mastery 
+Let’s tackle three quick challenges to test your understanding! Before you look, what's your 
+best guess? Try to visualize the action! 
+
+
+Scenario Challenge 1: 
+You submit a receipt in Coupa and immediately check SAP, but the tab is empty. What 
+happens? (Think: Remember the digital 'heartbeat'!) 
+<break time="15s"/>
+Answer: You likely didn't wait for the 5-minute integration cycle. The data hasn't transferred 
+yet! 
+
+
+Scenario Challenge 2: 
+Where is the ultimate "Financial Truth" located in SAP? (Think: Remember your financial 'Bank 
+Statement'!) 
+<break time="15s"/>
+Answer: In the SAP Purchase Order History tab (specifically the Material Document). 
+
+
+Scenario Challenge 3: 
+You accidentally type "100" instead of "10" when entering the quantity. Will Coupa stop you? 
+(Think: Remember the 'Phantom Pizza'!) 
+<break time="15s"/>
+Answer: No. (No Tolerance Set). It is your responsibility to double-check the data before 
+submitting. 
+
+
+[Slide 14] 
+
+The Digital Handshake Complete 
+Congratulations! Your Digital Handshake is Complete! 
+You've successfully mastered this crucial digital 'dance' between Coupa and SAP! By following 
+this process, you ensure that every physical delivery becomes an accurate financial record. 
+
+
+Your Achievements! 
+
+
+* You now *know how to* protect the company’s Audit Trail. 
+* You ensure Vendors get paid on time. 
+* You prevent Phantom Inventory from skewing the books. 
+Your Next Move: 
+Feeling confident and ready to practice? If you want a quick refresh or to solidify your memory, 
+click here for the interactive 'Key Terms in Action' flashcards! 

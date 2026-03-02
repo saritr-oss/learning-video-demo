@@ -1,0 +1,165 @@
+{
+  "course": "The Disengaged Kinesthetic",
+  "theme": "assets/theme.png",
+  "slides": [
+    {
+      "id": "1",
+      "group": "1",
+      "title": "The Digital Handshake: SAP & Coupa Goods Receipt",
+      "avatar": "videos/Slide_1.mp4"
+    },
+    {
+      "id": "1.1",
+      "group": "1",
+      "title": "Introduction & Objective",
+      "avatar": "videos/Slide_1_1.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/1.jpg"
+      }
+    },
+    {
+      "id": "2",
+      "group": "2",
+      "title": "The Reality vs. The Trigger",
+      "avatar": "videos/Slide_2.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/2.jpg"
+      }
+    },
+    {
+      "id": "3",
+      "group": "3",
+      "title": "The 4-Step Integration Cycle - Process Overview",
+      "avatar": "videos/Slide_3.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/3.jpg"
+      }
+    },
+    {
+      "id": "3.1",
+      "group": "3",
+      "title": "Step 1: Initiating the Receipt in Coupa – The Trigger",
+      "avatar": "videos/Slide_4.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/4.jpg"
+      }
+    },
+    {
+      "id": "3.2",
+      "group": "3",
+      "title": "Step 2: Quantity & The 'Tolerance' Risk – The Correction",
+      "avatar": "videos/Slide_5.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/5.jpg"
+      }
+    },
+    {
+      "id": "3.3",
+      "group": "3",
+      "title": "Step 3: Made a Mistake? Don't Delete. Void – The Correction",
+      "avatar": "videos/Slide_6.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/6.jpg"
+      }
+    },
+    {
+      "id": "3.4",
+      "group": "3",
+      "title": "Step 4: Verifying the Truth in SAP – The Proof",
+      "avatar": "videos/Slide_7.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/7.jpg"
+      }
+    },
+    {
+      "id": "3.4.1",
+      "group": "3.4",
+      "title": "The 5-Minute Heartbeat",
+      "avatar": "videos/Slide_8.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/8.jpg"
+      }
+    },
+    {
+      "id": "3.4.2",
+      "group": "3.4",
+      "title": "Step 3: Verifying the Truth in SAP",
+      "avatar": "videos/Slide_9.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/9.jpg"
+      }
+    },
+    {
+      "id": "3.4.3",
+      "group": "3.4",
+      "title": "Decoding the SAP Record",
+      "avatar": "videos/Slide_10.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/10.jpg"
+      }
+    },
+    {
+      "id": "3.4.4",
+      "group": "3.4",
+      "title": "Connecting the Dots",
+      "avatar": "videos/Slide_11.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/11.jpg"
+      }
+    },
+    {
+      "id": "3.4.5",
+      "group": "3.4",
+      "title": "The Dictionary of Goods Receipt",
+      "avatar": "videos/Slide_12.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/12.jpg"
+      }
+    },
+    {
+      "id": "4",
+      "group": "4",
+      "title": "Conceptual-Practical Check / Scenarios (Review & Testing)",
+      "avatar": "videos/Slide_13.mp4",
+      "frames": [
+        {
+          "src": "slides/13.jpeg",
+          "duration": 41
+        },
+        {
+          "src": "slides/13_1.jpeg",
+          "duration": 30
+        },
+        {
+          "src": "slides/13_2.jpeg",
+          "duration": 33
+        },
+        {
+          "src": "slides/13_3.jpeg"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "group": "5",
+      "title": "Summary / Digital Handshake Complete",
+      "avatar": "videos/Slide_14.mp4",
+      "main": {
+        "type": "image",
+        "src": "slides/14.jpg"
+      }
+    }
+  ]
+}
