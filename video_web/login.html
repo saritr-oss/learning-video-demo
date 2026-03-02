@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PAiDeVo - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050A10;
+            --surface: #111727;
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #4AD8E0;
+            --accent-grad: linear-gradient(271.3deg, #4AD8E0 -3.23%, #3C49DF 103.7%);
+            --text: #ECECEC;
+            --text-muted: #BABABA;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Rubik', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+        }
+
+        /* Subtle glow effect behind the card mimicking the play button*/
+        .login-card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--accent-grad);
+            z-index: -1;
+            border-radius: 14px;
+            opacity: 0.15;
+            filter: blur(10px);
+        }
+
+        .logo {
+            height: 38px;
+            margin-bottom: 35px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 14px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            background: var(--accent-grad);
+            border: none;
+            border-radius: 8px;
+            color: #0C1212;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: opacity 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 20px rgba(74, 216, 224, 0.35);
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            padding: 10px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <img src="assets/logo.png" alt="PAiDeVo" class="logo" onerror="this.src=''; this.alt='PAiDeVo'">
+
+        <div class="error" id="error-msg">Invalid username or password.</div>
+
+        <form action="/login" method="POST">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" name="username" required autocomplete="username" placeholder="Enter your username">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required autocomplete="current-password" placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn-submit">Sign In to Continue</button>
+        </form>
+    </div>
+
+    <script>
+        // Check URL for error parameter
+        if (window.location.search.includes('error=1')) {
+            document.getElementById('error-msg').style.display = 'block';
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
+</body>
+
+</html>

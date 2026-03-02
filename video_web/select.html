@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PAiDeVo - Select Persona</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050A10;
+            --surface: #111727;
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #4AD8E0;
+            --accent-grad: linear-gradient(271.3deg, #4AD8E0 -3.23%, #3C49DF 103.7%);
+            --text: #ECECEC;
+            --text-muted: #BABABA;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Rubik', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .container {
+            display: flex;
+            gap: 30px;
+            max-width: 800px;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .persona-card {
+            flex: 1;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .persona-card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--accent-grad);
+            z-index: -1;
+            border-radius: 14px;
+            opacity: 0;
+            filter: blur(8px);
+            transition: opacity 0.3s;
+        }
+
+        .persona-card:hover::before {
+            opacity: 0.15;
+        }
+
+        .persona-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background-color: #161c2e;
+        }
+
+        .icon {
+            font-size: 52px;
+            margin-bottom: 24px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .logo {
+            height: 32px;
+            position: absolute;
+            top: 40px;
+            left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="assets/logo.png" alt="PAiDeVo" class="logo" onerror="this.src=''; this.alt='PAiDeVo'">
+
+    <h1>Select a Learning Journey</h1>
+
+    <div class="container">
+        <a href="index.html?persona=the_autonomous_architect" class="persona-card">
+            <div class="icon">🏛️</div>
+            <div class="title">Persona A: The Autonomous Architect</div>
+            <div class="desc">A meticulous, theory-driven exploration of the SAP & Coupa Goods Receipt Digital Handshake
+                process.</div>
+        </a>
+
+        <a href="index.html?persona=the_disengaged_kinesthetic" class="persona-card">
+            <div class="icon">⚡</div>
+            <div class="title">Persona B: The Disengaged Kinesthetic</div>
+            <div class="desc">A fast-paced, highly practical approach to mastering the Goods Receipt flow with less
+                theory and more action.</div>
+        </a>
+    </div>
+</body>
+
+</html>

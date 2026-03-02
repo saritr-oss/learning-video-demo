@@ -134,6 +134,8 @@
 
   // ── Load slide ─────────────────────────────────────────────
   function loadSlide(index, autoplay) {
+    doPause(); // Force stop to avoid audio overlap
+
     currentIndex = index;
     const slide = course.slides[index];
     const src = slide.main ? (slide.main.src || '') : '';
