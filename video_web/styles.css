@@ -109,6 +109,16 @@ body {
   text-overflow: ellipsis;
 }
 
+#global-progress {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
+
 #slide-counter {
   font-size: 12px;
   color: var(--text-muted);
@@ -296,6 +306,35 @@ li.active .nav-title {
 #main-video.hidden,
 #main-image.hidden {
   display: none;
+}
+
+/* ── Subtitle overlay ── */
+#subtitle-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 5%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.02em;
+}
+
+#subtitle-overlay.visible {
+  opacity: 1;
 }
 
 

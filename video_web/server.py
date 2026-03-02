@@ -19,6 +19,10 @@ def load_env():
     return env_vars
 
 ENV = load_env()
+# Dev mode — set DEV=true in .env only (never in Cloud Run env vars)
+DEV_MODE = ENV.get("DEV", "").lower() in ("1", "true", "yes")
+if DEV_MODE:
+    print("⚠️  DEV MODE: authentication disabled")
 # Cloud Run uses OS environment variables; .env file is for local dev
 USER1_NAME = ENV.get("USER1_NAME") or os.environ.get("USER1_NAME", "autonomous")
 USER1_PASS = ENV.get("USER1_PASS") or os.environ.get("USER1_PASS", "architect123")
@@ -30,10 +34,13 @@ SESSIONS = set()
 
 class AuthHandler(http.server.SimpleHTTPRequestHandler):
     def check_auth(self):
+        if DEV_MODE:
+            return True
+
         # Allow unauthorized access to resources needed by the login page
         if self.path in ['/login.html', '/assets/logo.png', '/login'] or self.path.startswith('/styles.css'):
             return True
-            
+
         cookie_header = self.headers.get('Cookie')
         if cookie_header:
             cookie = http.cookies.SimpleCookie(cookie_header)

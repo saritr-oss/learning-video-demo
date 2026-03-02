@@ -12,6 +12,7 @@
   const avatarVideo = $('avatar-video');
   const mainVideo = $('main-video');
   const mainImage = $('main-image');
+  const subtitleOverlay = $('subtitle-overlay');
   const navList = $('nav-list');
   const courseTitleEl = $('course-title');
   const slideCounterEl = $('slide-counter');
@@ -23,6 +24,7 @@
   const progressFill = $('progress-fill');
   const progressThumb = $('progress-thumb');
   const timeDisplay = $('time-display');
+  const globalProgressEl = $('global-progress');
   const volSlider = $('vol-slider');
 
   // ── State ──────────────────────────────────────────────────
@@ -34,6 +36,8 @@
   let frames = null;    // current slide's frames array, or null
   let frameOffsets = [];      // precomputed start times in seconds
   let currentFrameIdx = 0;
+  let slideDurations = [];    // duration (seconds) per slide index, null until loaded
+  let activeTrack = null;     // current VTT TextTrack
 
   // ── Init ───────────────────────────────────────────────────
   function init() {
@@ -49,9 +53,27 @@
     extractTheme(course.theme || 'assets/theme.jpg');
     buildNav();
     bindControls();
+    slideDurations = new Array(course.slides.length).fill(null);
+    preloadAllDurations();
     loadSlide(0, false);
 
     requestAnimationFrame(progressLoop);
+  }
+
+  // ── Global duration preload ─────────────────────────────────
+  function preloadAllDurations() {
+    course.slides.forEach(function (slide, i) {
+      if (slide.frames) {
+        slideDurations[i] = slide.frames.reduce(function (sum, f) { return sum + (f.duration || 0); }, 0);
+        return;
+      }
+      const v = document.createElement('video');
+      v.preload = 'metadata';
+      v.src = slide.avatar || '';
+      v.addEventListener('loadedmetadata', function () {
+        slideDurations[i] = v.duration;
+      });
+    });
   }
 
   // ── Theme extraction ───────────────────────────────────────
@@ -135,6 +157,7 @@
   // ── Load slide ─────────────────────────────────────────────
   function loadSlide(index, autoplay) {
     doPause(); // Force stop to avoid audio overlap
+    clearSubtitles();
 
     currentIndex = index;
     const slide = course.slides[index];
@@ -162,6 +185,7 @@
       avatarVideo.classList.remove('blank');
       mainVideo.classList.add('hidden');
       mainImage.classList.remove('hidden');
+      loadSubtitles(slide.avatar, avatarVideo);
       mainImage.src = frames[0].src;
     } else {
       // ── Auto-detect layout: no src → avatar fullscreen in main area ──
@@ -175,6 +199,7 @@
         avatarVideo.src = slide.avatar || '';
         avatarVideo.load();
         avatarVideo.classList.toggle('blank', currentType === 'video');
+        loadSubtitles(slide.avatar, avatarVideo);
       }
 
       // ── Main content ──
@@ -190,6 +215,7 @@
         mainVideo.load();
         mainVideo.classList.remove('hidden');
         mainImage.classList.add('hidden');
+        loadSubtitles(slide.avatar, mainVideo);
       } else {
         mainVideo.classList.add('hidden');
         mainImage.classList.remove('hidden');
@@ -266,6 +292,16 @@
       progressThumb.style.left = pct + '%';
       timeDisplay.textContent = fmtTime(timeVid.currentTime) + ' / ' + fmtTime(timeVid.duration);
     }
+
+    // ── Global course progress ──
+    const allLoaded = slideDurations.every(function (d) { return d !== null; });
+    let offset = 0;
+    for (let i = 0; i < currentIndex; i++) {
+      offset += slideDurations[i] || 0;
+    }
+    const globalNow = offset + (timeVid.currentTime || 0);
+    const globalTotal = slideDurations.reduce(function (s, d) { return s + (d || 0); }, 0);
+    globalProgressEl.textContent = fmtTime(globalNow) + ' / ' + (allLoaded ? fmtTime(globalTotal) : '--:--');
 
     // ── Frame cycling (also handles seek correction) ──
     if (frames && frames.length > 1) {
@@ -370,6 +406,62 @@
     } else {
       btnMute.innerHTML = '&#128266;';
     }
+  }
+
+  // ── Subtitles ─────────────────────────────────────────────
+  function clearSubtitles() {
+    subtitleOverlay.textContent = '';
+    subtitleOverlay.classList.remove('visible');
+    activeTrack = null;
+    // Remove any existing track elements
+    document.querySelectorAll('#avatar-video track, #main-video track').forEach(t => t.remove());
+  }
+
+  function loadSubtitles(avatarSrc, videoEl) {
+    if (!avatarSrc) return;
+    // Derive VTT path from avatar video path: videos/Slide_X.mp4 -> videos/Slide_X.vtt
+    const vttSrc = avatarSrc.replace(/\.mp4$/i, '.vtt');
+
+    // Check if VTT file exists
+    fetch(vttSrc, { method: 'HEAD' })
+      .then(function (resp) {
+        if (!resp.ok) return;
+
+        const track = document.createElement('track');
+        track.kind = 'subtitles';
+        track.label = 'English';
+        track.srclang = 'en';
+        track.src = vttSrc;
+        track.default = true;
+        videoEl.appendChild(track);
+
+        // Wait for track to load, then listen for cue changes
+        track.addEventListener('load', function () {
+          activeTrack = track.track;
+          activeTrack.mode = 'hidden'; // we render manually
+          activeTrack.addEventListener('cuechange', onCueChange);
+        });
+
+        // Force track mode if already loaded
+        setTimeout(function () {
+          if (track.track && track.track.cues) {
+            activeTrack = track.track;
+            activeTrack.mode = 'hidden';
+            activeTrack.addEventListener('cuechange', onCueChange);
+          }
+        }, 500);
+      })
+      .catch(function () { /* VTT not found — no subtitles */ });
+  }
+
+  function onCueChange() {
+    if (!activeTrack || !activeTrack.activeCues || activeTrack.activeCues.length === 0) {
+      subtitleOverlay.classList.remove('visible');
+      return;
+    }
+    const cue = activeTrack.activeCues[0];
+    subtitleOverlay.textContent = cue.text;
+    subtitleOverlay.classList.add('visible');
   }
 
   // ── Start ──────────────────────────────────────────────────
