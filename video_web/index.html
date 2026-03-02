@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Course Player</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <div id="app">
 
     <!-- HEADER -->
     <header id="header">
+      <a id="btn-back" href="select.html" title="Back to Persona Selection">&#9664; Back</a>
       <img id="logo" src="assets/logo.png" alt="PAiDeVo" />
       <span id="course-title"></span>
       <span id="slide-counter"></span>
@@ -47,13 +50,13 @@
           <img id="main-image" alt="Slide" />
 
 
-</div><!-- /#content-area -->
+        </div><!-- /#content-area -->
 
         <!-- Custom controls bar -->
         <div id="controls-bar">
-          <button id="btn-prev"  class="ctrl-btn" title="Previous (←)">&#9664;&#9664;</button>
-          <button id="btn-play"  class="ctrl-btn play-btn" title="Play / Pause (Space)">&#9654;</button>
-          <button id="btn-next"  class="ctrl-btn" title="Next (→)">&#9654;&#9654;</button>
+          <button id="btn-prev" class="ctrl-btn" title="Previous (←)">&#9664;&#9664;</button>
+          <button id="btn-play" class="ctrl-btn play-btn" title="Play / Pause (Space)">&#9654;</button>
+          <button id="btn-next" class="ctrl-btn" title="Next (→)">&#9654;&#9654;</button>
 
           <div id="progress-track" title="Click to seek">
             <div id="progress-fill"></div>
@@ -76,4 +79,5 @@
   <script src="course.js"></script>
   <script src="player.js"></script>
 </body>
+
 </html>

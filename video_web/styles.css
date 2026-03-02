@@ -75,6 +75,30 @@ body {
   flex-shrink: 0;
 }
 
+#btn-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  background: rgba(74, 216, 224, 0.08);
+}
+
+#btn-back:hover {
+  color: var(--text-dark);
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
 #course-title {
   font-size: 14px;
   font-weight: 500;
