@@ -1,0 +1,7 @@
+.env
+env_vars_temp.yaml
+deploy.sh
+__pycache__
+*.pyc
+.DS_Store
+.git

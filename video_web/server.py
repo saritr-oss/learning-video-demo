@@ -19,10 +19,11 @@ def load_env():
     return env_vars
 
 ENV = load_env()
-USER1_NAME = ENV.get("USER1_NAME", "autonomous")
-USER1_PASS = ENV.get("USER1_PASS", "architect123")
-USER2_NAME = ENV.get("USER2_NAME", "kinesthetic")
-USER2_PASS = ENV.get("USER2_PASS", "disengaged123")
+# Cloud Run uses OS environment variables; .env file is for local dev
+USER1_NAME = ENV.get("USER1_NAME") or os.environ.get("USER1_NAME", "autonomous")
+USER1_PASS = ENV.get("USER1_PASS") or os.environ.get("USER1_PASS", "architect123")
+USER2_NAME = ENV.get("USER2_NAME") or os.environ.get("USER2_NAME", "kinesthetic")
+USER2_PASS = ENV.get("USER2_PASS") or os.environ.get("USER2_PASS", "disengaged123")
 
 # Super simple session tracking (in memory)
 SESSIONS = set()
@@ -89,7 +90,7 @@ class AuthHandler(http.server.SimpleHTTPRequestHandler):
 # Prevent port conflicts by allowing reuse
 socketserver.TCPServer.allow_reuse_address = True
 
-PORT = 8080
+PORT = int(os.environ.get("PORT", 8080))
 Handler = AuthHandler
 
 try:

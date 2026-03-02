@@ -1,5 +1,6 @@
 # Environment variables (contains credentials)
 .env
+env_vars_temp.yaml
 
 # Python
 __pycache__/
