@@ -409,10 +409,19 @@
   }
 
   // ── Subtitles ─────────────────────────────────────────────
+  let subtitlePollId = null;
+
   function clearSubtitles() {
     subtitleOverlay.textContent = '';
     subtitleOverlay.classList.remove('visible');
+    if (activeTrack) {
+      activeTrack.removeEventListener('cuechange', onCueChange);
+    }
     activeTrack = null;
+    if (subtitlePollId) {
+      clearInterval(subtitlePollId);
+      subtitlePollId = null;
+    }
     // Remove any existing track elements
     document.querySelectorAll('#avatar-video track, #main-video track').forEach(t => t.remove());
   }
@@ -422,36 +431,41 @@
     // Derive VTT path from avatar video path: videos/Slide_X.mp4 -> videos/Slide_X.vtt
     const vttSrc = avatarSrc.replace(/\.mp4$/i, '.vtt');
 
-    // Check if VTT file exists
-    fetch(vttSrc, { method: 'HEAD' })
-      .then(function (resp) {
-        if (!resp.ok) return;
+    const track = document.createElement('track');
+    track.kind = 'subtitles';
+    track.label = 'English';
+    track.srclang = 'en';
+    track.src = vttSrc;
+    track.default = true;
+    videoEl.appendChild(track);
 
-        const track = document.createElement('track');
-        track.kind = 'subtitles';
-        track.label = 'English';
-        track.srclang = 'en';
-        track.src = vttSrc;
-        track.default = true;
-        videoEl.appendChild(track);
+    function activateTrack() {
+      if (activeTrack) return; // already activated
+      if (track.track) {
+        activeTrack = track.track;
+        activeTrack.mode = 'hidden'; // we render manually, not browser default
+        activeTrack.addEventListener('cuechange', onCueChange);
+        // Manually trigger a cue check in case we missed the first cuechange
+        onCueChange();
+      }
+    }
 
-        // Wait for track to load, then listen for cue changes
-        track.addEventListener('load', function () {
-          activeTrack = track.track;
-          activeTrack.mode = 'hidden'; // we render manually
-          activeTrack.addEventListener('cuechange', onCueChange);
-        });
+    // Try to activate on load event
+    track.addEventListener('load', activateTrack);
 
-        // Force track mode if already loaded
-        setTimeout(function () {
-          if (track.track && track.track.cues) {
-            activeTrack = track.track;
-            activeTrack.mode = 'hidden';
-            activeTrack.addEventListener('cuechange', onCueChange);
-          }
-        }, 500);
-      })
-      .catch(function () { /* VTT not found — no subtitles */ });
+    // Retry polling — track may not be ready immediately
+    let retries = 0;
+    subtitlePollId = setInterval(function () {
+      retries++;
+      if (track.track && track.track.cues && track.track.cues.length > 0) {
+        clearInterval(subtitlePollId);
+        subtitlePollId = null;
+        activateTrack();
+      } else if (retries > 25) {
+        clearInterval(subtitlePollId); // give up after 5 seconds
+        subtitlePollId = null;
+      }
+    }, 200);
   }
 
   function onCueChange() {
