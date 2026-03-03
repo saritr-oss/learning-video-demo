@@ -8,25 +8,43 @@ import os
 import sys
 
 def synthesize_slides():
-    # Usage: python synthesize_slides.py <directory> <request_json> [--test]
-    # Example: python synthesize_slides.py "videos/The Disengaged Kinesthetic" request_male_en-GB-Studio-B.json
-    # Example: python synthesize_slides.py "videos/The Disengaged Kinesthetic" request_male_en-GB-Studio-B.json --test
+    # Usage: python synthesize_slides.py <text_dir> <request_json> [--output-dir <dir>] [--test]
+    # <text_dir> is the folder containing text.txt (e.g. "slides/The Autonomous Architect")
+    # --output-dir: where to save MP3s (defaults to <text_dir>)
+    # Example: python synthesize_slides.py "slides/The Autonomous Architect" request_male_en-US-Studio-M.json --test
+    # Example: python synthesize_slides.py "slides/The Autonomous Architect" request_male_en-GB-Studio-B.json --output-dir "videos/The Autonomous Architect"
     if len(sys.argv) < 3:
-        print("Usage: python synthesize_slides.py <directory> <request_json> [--test]")
-        print("Example: python synthesize_slides.py \"videos/The Disengaged Kinesthetic\" request_male_en-GB-Studio-B.json")
+        print("Usage: python synthesize_slides.py <text_dir> <request_json> [--output-dir <dir>] [--test]")
+        print("Example: python synthesize_slides.py \"slides/The Autonomous Architect\" request_male_en-US-Studio-M.json --test")
         sys.exit(1)
 
-    base_dir = sys.argv[1]
+    text_dir = sys.argv[1]
     request_json = sys.argv[2]
     test_mode = "--test" in sys.argv
 
-    # Find the .txt file inside the directory
-    txt_files = [f for f in os.listdir(base_dir) if f.endswith(".txt")]
-    if not txt_files:
-        print(f"No .txt file found in {base_dir}")
-        sys.exit(1)
-    filepath = os.path.join(base_dir, txt_files[0])
+    # Optional --output-dir argument
+    output_dir = text_dir
+    if "--output-dir" in sys.argv:
+        idx = sys.argv.index("--output-dir")
+        if idx + 1 < len(sys.argv):
+            output_dir = sys.argv[idx + 1]
+        else:
+            print("--output-dir requires a path argument")
+            sys.exit(1)
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Read text.txt from text_dir
+    filepath = os.path.join(text_dir, "text.txt")
+    if not os.path.exists(filepath):
+        # Fallback: find any .txt file
+        txt_files = [f for f in os.listdir(text_dir) if f.endswith(".txt")]
+        if not txt_files:
+            print(f"No text.txt (or any .txt file) found in {text_dir}")
+            sys.exit(1)
+        filepath = os.path.join(text_dir, txt_files[0])
     print(f"Found text file: {filepath}")
+    print(f"Output directory: {output_dir}")
 
     print("Getting auth token...")
     try:
@@ -54,7 +72,7 @@ def synthesize_slides():
         print(f"{request_json} not found.")
         return
         
-    print(f"Reading {filepath} and saving inside {base_dir}")
+    print(f"Reading {filepath} and saving inside {output_dir}")
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -85,12 +103,10 @@ def synthesize_slides():
         if not clean_text:
             continue
             
-        # Create a meaningful name
+        # Create a simple name like Slide_1.mp3
         slide_num = re.search(r'[\d.]+', slide_marker).group().replace('.', '_')
-        words = re.sub(r'[^\w\s]', '', slide_text).split()
-        short_title = "_".join(words[:5])
-        filename = f"Slide_{slide_num}_{short_title}.mp3"
-        filename = os.path.join(base_dir, filename)
+        filename = f"Slide_{slide_num}.mp3"
+        filename = os.path.join(output_dir, filename)
 
         if os.path.exists(filename):
             print(f"Skipping {filename} (already exists)")

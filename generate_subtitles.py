@@ -30,7 +30,7 @@ PERSONAS = {
 }
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-VIDEOS_SRC = os.path.join(BASE_DIR, "videos")
+VIDEOS_SRC = os.path.join(BASE_DIR, "slides")
 WEB_PERSONA = os.path.join(BASE_DIR, "video_web", "persona")
 
 # Maximum characters per subtitle line

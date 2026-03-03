@@ -1,0 +1,14 @@
+{
+    "input": {
+        "text": "Building a Welcoming and Effective Environment"
+    },
+    "voice": {
+        "languageCode": "en-US",
+        "name": "en-US-Studio-O"
+    },
+    "audioConfig": {
+        "audioEncoding": "MP3",
+        "speakingRate": 0.75,
+        "pitch": 0.0
+    }
+}

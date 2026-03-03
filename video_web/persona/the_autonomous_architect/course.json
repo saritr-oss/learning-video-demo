@@ -135,19 +135,19 @@
       "avatar": "videos/Slide_13.mp4",
       "frames": [
         {
-          "src": "slides/13.jpeg",
+          "src": "slides/13.jpg",
           "duration": 51
         },
         {
-          "src": "slides/13_1.jpeg",
+          "src": "slides/13_1.jpg",
           "duration": 26
         },
         {
-          "src": "slides/13_2.jpeg",
+          "src": "slides/13_2.jpg",
           "duration": 28
         },
         {
-          "src": "slides/13_3.jpeg"
+          "src": "slides/13_3.jpg"
         }
       ]
     },
