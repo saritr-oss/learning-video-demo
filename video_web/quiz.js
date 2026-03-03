@@ -13,16 +13,25 @@
     let userAnswers = {};
     let currentAutoIdx = 0;
 
-    // ── Load quiz data ──
-    fetch('quiz.json')
-        .then(r => r.json())
-        .then(data => {
-            quizData = data;
-            init();
-        })
-        .catch(err => {
-            console.error('Failed to load quiz.json', err);
-        });
+    // ── Load quiz data from persona folder, skip if not found ──
+    const _persona = new URLSearchParams(window.location.search).get('persona') || '';
+    if (!_persona) {
+        window.location.href = 'select.html';
+    } else {
+        fetch('persona/' + _persona + '/quiz.json')
+            .then(function (r) {
+                if (!r.ok) throw new Error('no quiz');
+                return r.json();
+            })
+            .then(function (data) {
+                quizData = data;
+                init();
+            })
+            .catch(function () {
+                // No quiz for this persona — return to course selection
+                window.location.href = 'select.html';
+            });
+    }
 
     function init() {
         $('quiz-title').textContent = quizData.title;
@@ -195,6 +204,9 @@
         $('results-card').classList.remove('hidden');
         $('quiz-progress').textContent = 'Results';
 
+        const maxScore = quizData.questions.length * quizData.pointsPerQuestion;
+        $('score-max').textContent = '/' + maxScore;
+
         let totalScore = 0;
         const breakdownEl = $('breakdown-list');
         breakdownEl.innerHTML = '';
@@ -229,6 +241,15 @@
 
             info.appendChild(qTitle);
             info.appendChild(qDetail);
+
+            if (!isCorrect && q.slideRef) {
+                const reviewLink = document.createElement('a');
+                reviewLink.className = 'breakdown-review-link';
+                reviewLink.href = 'index.html?persona=' + encodeURIComponent(_persona) + '&slide=' + q.slideRef;
+                reviewLink.textContent = '▶ Review this section';
+                info.appendChild(reviewLink);
+            }
+
             row.appendChild(icon);
             row.appendChild(info);
 

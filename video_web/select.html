@@ -36,16 +36,22 @@
         }
 
         .container {
-            display: flex;
-            gap: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
             max-width: 800px;
             width: 100%;
             padding: 0 20px;
             box-sizing: border-box;
         }
 
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .persona-card {
-            flex: 1;
             background-color: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -92,15 +98,17 @@
         }
 
         .title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+            color: #fff;
         }
 
         .desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.5;
+            font-size: 15px;
+            color: var(--accent);
+            line-height: 1.4;
+            font-weight: 500;
         }
 
         .logo {
@@ -120,16 +128,26 @@
     <div class="container">
         <a href="index.html?persona=the_autonomous_architect" class="persona-card">
             <div class="icon">🏛️</div>
-            <div class="title">Persona A: The Autonomous Architect</div>
-            <div class="desc">A meticulous, theory-driven exploration of the SAP & Coupa Goods Receipt Digital Handshake
-                process.</div>
+            <div class="title">SAP & Coupa Goods Receipt</div>
+            <div class="desc">Persona A: The Autonomous Architect</div>
         </a>
 
         <a href="index.html?persona=the_disengaged_kinesthetic" class="persona-card">
             <div class="icon">⚡</div>
-            <div class="title">Persona B: The Disengaged Kinesthetic</div>
-            <div class="desc">A fast-paced, highly practical approach to mastering the Goods Receipt flow with less
-                theory and more action.</div>
+            <div class="title">SAP & Coupa Goods Receipt</div>
+            <div class="desc">Persona B: The Disengaged Kinesthetic</div>
+        </a>
+
+        <a href="index.html?persona=the_autonomous_architect_B" class="persona-card">
+            <div class="icon">🎧</div>
+            <div class="title">Building Cultural Awareness</div>
+            <div class="desc">Persona A: The Autonomous Architect</div>
+        </a>
+
+        <a href="index.html?persona=the_disengaged_kinesthetic_B" class="persona-card">
+            <div class="icon">🎧</div>
+            <div class="title">Building Cultural Awareness</div>
+            <div class="desc">Persona B: The Disengaged Kinesthetic</div>
         </a>
     </div>
 </body>

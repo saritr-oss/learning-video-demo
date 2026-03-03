@@ -812,3 +812,24 @@ li.active .nav-title {
   background: var(--accent);
   box-shadow: 0 0 6px var(--accent-glow);
 }
+
+/* ── Review link on wrong quiz answers ── */
+.breakdown-review-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.breakdown-review-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   AUDIO-ONLY MODE — hide avatar video slot, keep nav
+   ============================================================ */
+body.audio-only #avatar-slot {
+  display: none;
+}

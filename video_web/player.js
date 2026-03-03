@@ -51,11 +51,18 @@
     courseTitleEl.textContent = course.course;
 
     extractTheme(course.theme || 'assets/theme.jpg');
+    if (course.audioOnly) {
+      document.body.classList.add('audio-only');
+    }
     buildNav();
     bindControls();
     slideDurations = new Array(course.slides.length).fill(null);
     preloadAllDurations();
-    loadSlide(0, false);
+    const slideParam = parseInt(new URLSearchParams(window.location.search).get('slide'), 10);
+    const startIndex = (!isNaN(slideParam) && slideParam >= 1)
+      ? Math.min(slideParam - 1, course.slides.length - 1)
+      : 0;
+    loadSlide(startIndex, false);
 
     requestAnimationFrame(progressLoop);
   }
@@ -272,8 +279,19 @@
   // ── Auto-advance ────────────────────────────────────────────
   function onSlideEnded() {
     if (currentIndex >= course.slides.length - 1) {
-      // Last slide ended — navigate to quiz
-      window.location.href = 'quiz.html';
+      // Last slide ended — check if a quiz exists for this persona before navigating
+      const persona = new URLSearchParams(window.location.search).get('persona') || '';
+      if (!persona) return; // no persona, stay put
+      fetch('persona/' + persona + '/quiz.json', { method: 'HEAD' })
+        .then(function (r) {
+          if (r.ok) {
+            window.location.href = 'quiz.html?persona=' + encodeURIComponent(persona);
+          }
+          // no quiz file — stay on the last slide
+        })
+        .catch(function () {
+          // network error — stay on the last slide
+        });
       return;
     }
     loadSlide(currentIndex + 1, true);
@@ -433,7 +451,7 @@
   function loadSubtitles(avatarSrc, videoEl) {
     if (!avatarSrc) return;
     // Derive VTT path from avatar video path: videos/Slide_X.mp4 -> videos/Slide_X.vtt
-    const vttSrc = avatarSrc.replace(/\.mp4$/i, '.vtt');
+    const vttSrc = avatarSrc.replace(/\.(mp4|mp3)$/i, '.vtt');
 
     const track = document.createElement('track');
     track.kind = 'subtitles';
