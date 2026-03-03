@@ -6,7 +6,10 @@
       "Bash(done)",
       "Bash(python3:*)",
       "Read(//Users/gilrubin/dev/Paidevo-questionnaire/frontend/src/components/**)",
-      "Read(//Users/gilrubin/dev/Paidevo-questionnaire/frontend/src/pages/**)"
+      "Read(//Users/gilrubin/dev/Paidevo-questionnaire/frontend/src/pages/**)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
