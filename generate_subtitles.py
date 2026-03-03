@@ -224,15 +224,85 @@ def process_persona(persona_name, persona_slug):
             delete_from_gcs(gcs_key)
 
 
+def process_dir(directory, limit=None):
+    """Process all MP3 files in a given directory and write VTTs alongside them.
+    Usage: python3 generate_subtitles.py --dir <path> [--limit N]
+    """
+    directory = os.path.abspath(directory)
+    if not os.path.isdir(directory):
+        print(f"⚠️  Directory not found: {directory}")
+        return
+
+    mp3_files = sorted([f for f in os.listdir(directory) if f.endswith(".mp3")])
+    print(f"\n{'='*60}")
+    print(f"Processing directory: {directory} ({len(mp3_files)} MP3 files)")
+    print(f"{'='*60}\n")
+
+    processed = 0
+    for mp3_file in mp3_files:
+        if limit is not None and processed >= limit:
+            break
+        slide_num = extract_slide_num(mp3_file)
+        if slide_num is None:
+            print(f"⚠️  Skipping {mp3_file} (can't extract slide number)")
+            continue
+
+        vtt_filename = f"Slide_{slide_num}.vtt"
+        vtt_path = os.path.join(directory, vtt_filename)
+
+        if os.path.exists(vtt_path):
+            print(f"⏭️  {vtt_filename} already exists, skipping")
+            continue
+
+        mp3_path = os.path.join(directory, mp3_file)
+        gcs_key = f"{GCS_TEMP_PREFIX}/custom/{mp3_file}"
+
+        print(f"🎙️  {mp3_file} → {vtt_filename}")
+
+        try:
+            words = transcribe_mp3(mp3_path, gcs_key)
+
+            if not words:
+                print(f"  ⚠️  No words detected, skipping")
+                continue
+
+            cues = words_to_vtt_cues(words)
+            vtt_content = generate_vtt(cues)
+
+            with open(vtt_path, "w") as f:
+                f.write(vtt_content)
+
+            print(f"  ✅ Generated {vtt_filename} ({len(cues)} subtitle cues)")
+            processed += 1
+
+        except Exception as e:
+            print(f"  ❌ Error: {e}")
+            delete_from_gcs(gcs_key)
+
+
 def main():
     print("🎬 Subtitle Generator — Google Cloud Speech-to-Text")
     print(f"   Project: {PROJECT_ID}\n")
 
-    for persona_name, persona_slug in PERSONAS.items():
-        process_persona(persona_name, persona_slug)
+    limit = None
+    if "--limit" in sys.argv:
+        idx = sys.argv.index("--limit")
+        if idx + 1 < len(sys.argv):
+            limit = int(sys.argv[idx + 1])
+
+    if "--dir" in sys.argv:
+        idx = sys.argv.index("--dir")
+        if idx + 1 < len(sys.argv):
+            process_dir(sys.argv[idx + 1], limit=limit)
+        else:
+            print("--dir requires a path argument")
+            sys.exit(1)
+    else:
+        for persona_name, persona_slug in PERSONAS.items():
+            process_persona(persona_name, persona_slug)
 
     print(f"\n{'='*60}")
-    print("🎉 Done! VTT files are in video_web/persona/<persona>/videos/")
+    print("🎉 Done!")
     print(f"{'='*60}")
 
 
