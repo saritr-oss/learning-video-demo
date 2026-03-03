@@ -1,0 +1,161 @@
+{
+    "title": "Goods Receipt Knowledge Check",
+    "pointsPerQuestion": 2,
+    "questions": [
+        {
+            "id": 1,
+            "type": "Prediction",
+            "label": "Question 1: Prediction",
+            "scenario": "You ordered 10 office chairs. The supplier accidentally delivered 12, and the packing slip says 12. Because you are in a rush, you type \"12\" into the Quantity field in Coupa and click submit. Based on the current system configuration, what will happen?",
+            "options": [
+                {
+                    "label": "A",
+                    "text": "The system will immediately block the transaction and prompt an error message."
+                },
+                {
+                    "label": "B",
+                    "text": "The system will accept the receipt of 12, creating a \"phantom inventory\" risk and financial liability for the company."
+                },
+                {
+                    "label": "C",
+                    "text": "The system will route the receipt to IT for manual approval because it exceeds the limit."
+                },
+                {
+                    "label": "D",
+                    "text": "The system will automatically create a \"Void Consumption\" document."
+                }
+            ],
+            "correct": "B"
+        },
+        {
+            "id": 2,
+            "type": "Critique & Justify",
+            "label": "Question 2: Critique & Justify",
+            "scenario": "A new employee in your department makes a data entry error when entering a receipt quantity in Coupa. They complain to you: \"Why does this system make me create a 'Void Consumption' document? It would be so much easier if I could just hit 'Delete' and pretend the mistake never happened!\" Which of the following is the best justification to explain the corporate and financial logic to your colleague?",
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Deleting requires IT approval, whereas \"Voiding\" can be done by the business requester independently."
+                },
+                {
+                    "label": "B",
+                    "text": "The system does not have a delete button because Coupa cannot delete records that are older than 5 minutes."
+                },
+                {
+                    "label": "C",
+                    "text": "Deleting erases history and hides mistakes. \"Voiding\" maintains a perfect Audit Trail by keeping a record of the error and zeroing out the ledger with the correction, ensuring transparency."
+                },
+                {
+                    "label": "D",
+                    "text": "\"Voiding\" automatically triggers an email to the supplier to physically return the goods, while deleting only affects the internal software."
+                }
+            ],
+            "correct": "C"
+        },
+        {
+            "id": 3,
+            "type": "Metaphorize",
+            "label": "Question 3: Metaphorize",
+            "scenario": "In the lesson, the relationship between our front-end trigger (Coupa) and our back-end financial truth (SAP) is compared to personal banking. Complete the analogy below:\n\n\"Entering the receipt in Coupa is like writing a transaction in your [Term 1], whereas the Purchase Order History tab in SAP acts as your [Term 2], proving the transaction actually cleared.\"",
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Term 1: Tax Return | Term 2: Receipt"
+                },
+                {
+                    "label": "B",
+                    "text": "Term 1: Bank Statement | Term 2: Checkbook"
+                },
+                {
+                    "label": "C",
+                    "text": "Term 1: Savings Account | Term 2: Credit Card"
+                },
+                {
+                    "label": "D",
+                    "text": "Term 1: Checkbook | Term 2: Bank Statement"
+                }
+            ],
+            "correct": "D"
+        },
+        {
+            "id": 4,
+            "type": "Diagnosis & Troubleshooting",
+            "label": "Question 4: Diagnosis & Troubleshooting",
+            "scenario": "You have just clicked the \"Truck Icon\" in Coupa and submitted your goods receipt. You want to be absolutely certain the finance department can see it, so you immediately log into SAP, open the PO, and navigate to the Purchase Order History tab. The tab is completely empty. What is the structural diagnosis for this missing \"Material Document,\" and what action should you take?",
+            "options": [
+                {
+                    "label": "A",
+                    "text": "Diagnosis: The system crashed. Action: Contact IT support."
+                },
+                {
+                    "label": "B",
+                    "text": "Diagnosis: Coupa and SAP sync periodically, not instantly. Action: Wait for the 5-minute integration cycle to complete before checking SAP."
+                },
+                {
+                    "label": "C",
+                    "text": "Diagnosis: You entered the wrong quantity. Action: Void the receipt and start over."
+                },
+                {
+                    "label": "D",
+                    "text": "Diagnosis: The supplier rejected the receipt. Action: Email the supplier for approval."
+                }
+            ],
+            "correct": "B"
+        },
+        {
+            "id": 5,
+            "type": "Synthesis & Proof",
+            "label": "Question 5: Synthesis & Proof",
+            "scenario": "Evaluate the following statement:\n\n\"Because Coupa and SAP are separate systems, once a receipt integrates, an auditor has no way to prove which specific Coupa action generated a specific SAP Material Document.\"\n\nWhich option correctly identifies whether this statement is True or False, and provides the correct system proof?",
+            "options": [
+                {
+                    "label": "A",
+                    "text": "True. The systems are completely separate, so auditors must guess the connection based on the receipt date."
+                },
+                {
+                    "label": "B",
+                    "text": "False. You can prove the link by checking the 'Header Text' inside the SAP Material Document, which permanently stores the original Coupa GR number."
+                },
+                {
+                    "label": "C",
+                    "text": "False. You can prove the link by asking the supplier to send a consolidated invoice matching the delivery."
+                },
+                {
+                    "label": "D",
+                    "text": "True. SAP generates a unique 5000-series number that overwrites and erases the original Coupa data."
+                }
+            ],
+            "correct": "B"
+        }
+    ],
+    "demoAnswers": {
+        "1": "B",
+        "2": "C",
+        "3": "D",
+        "4": "B",
+        "5": "B"
+    },
+    "levels": [
+        {
+            "min": 0,
+            "max": 4,
+            "label": "Low Understanding",
+            "emoji": "🔴",
+            "color": "#e74c3c"
+        },
+        {
+            "min": 5,
+            "max": 7,
+            "label": "Moderate Understanding",
+            "emoji": "🟡",
+            "color": "#f1c40f"
+        },
+        {
+            "min": 8,
+            "max": 10,
+            "label": "High Understanding",
+            "emoji": "🟢",
+            "color": "#2ecc71"
+        }
+    ]
+}

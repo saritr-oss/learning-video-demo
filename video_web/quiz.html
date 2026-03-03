@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knowledge Check — PAiDeVo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="quiz-app">
+
+        <!-- HEADER -->
+        <header id="quiz-header">
+            <a id="btn-back" href="select.html" title="Back to Persona Selection">&#9664; Back</a>
+            <img id="logo" src="assets/logo.png" alt="PAiDeVo" />
+            <span id="quiz-title">Knowledge Check</span>
+            <span id="quiz-progress"></span>
+        </header>
+
+        <!-- QUIZ BODY -->
+        <main id="quiz-body">
+
+            <!-- Question Card -->
+            <div id="question-card" class="hidden">
+                <div id="question-header">
+                    <span id="question-label"></span>
+                    <div id="progress-dots"></div>
+                </div>
+                <div id="options-list"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <button id="btn-submit" class="quiz-btn primary hidden">Submit Answers</button>
+            <!-- Results Card -->
+            <div id="results-card" class="hidden">
+                <div id="results-score-section">
+                    <div id="score-circle">
+                        <span id="score-value">0</span>
+                        <span id="score-max">/10</span>
+                    </div>
+                    <div id="score-level"></div>
+                    <div id="score-label">Performance Score</div>
+                </div>
+                <div id="results-breakdown">
+                    <h3>Question Breakdown</h3>
+                    <div id="breakdown-list"></div>
+                </div>
+                <a id="btn-back-to-select" href="select.html" class="quiz-btn primary">Back to Course Selection</a>
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+
+</html>

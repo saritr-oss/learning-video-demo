@@ -271,7 +271,11 @@
 
   // ── Auto-advance ────────────────────────────────────────────
   function onSlideEnded() {
-    if (currentIndex >= course.slides.length - 1) return;
+    if (currentIndex >= course.slides.length - 1) {
+      // Last slide ended — navigate to quiz
+      window.location.href = 'quiz.html';
+      return;
+    }
     loadSlide(currentIndex + 1, true);
   }
 
