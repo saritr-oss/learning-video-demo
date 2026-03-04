@@ -14,7 +14,10 @@
     let currentAutoIdx = 0;
 
     // ── Load quiz data from persona folder, skip if not found ──
-    const _persona = new URLSearchParams(window.location.search).get('persona') || '';
+    const _urlParams = new URLSearchParams(window.location.search);
+    const _persona = _urlParams.get('persona') || '';
+    const _showResults = _urlParams.get('results') === '1';
+
     if (!_persona) {
         window.location.href = 'select.html';
     } else {
@@ -25,6 +28,16 @@
             })
             .then(function (data) {
                 quizData = data;
+                // If returning from a review slide, restore saved answers and jump to results
+                if (_showResults) {
+                    const saved = sessionStorage.getItem('quizAnswers_' + _persona);
+                    if (saved) {
+                        userAnswers = JSON.parse(saved);
+                        buildQuizDOM();
+                        showResults();
+                        return;
+                    }
+                }
                 init();
             })
             .catch(function () {
@@ -33,7 +46,7 @@
             });
     }
 
-    function init() {
+    function buildQuizDOM() {
         $('quiz-title').textContent = quizData.title;
 
         // Build all questions on the page
@@ -82,6 +95,10 @@
             dot.id = 'dot-' + q.id;
             dotsEl.appendChild(dot);
         });
+    }
+
+    function init() {
+        buildQuizDOM();
 
         // Show question card
         $('question-card').classList.remove('hidden');
@@ -203,6 +220,9 @@
         $('btn-submit').classList.add('hidden');
         $('results-card').classList.remove('hidden');
         $('quiz-progress').textContent = 'Results';
+
+        // Persist answers so "Back" from a review slide restores this results view
+        sessionStorage.setItem('quizAnswers_' + _persona, JSON.stringify(userAnswers));
 
         const maxScore = quizData.questions.length * quizData.pointsPerQuestion;
         $('score-max').textContent = '/' + maxScore;

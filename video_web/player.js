@@ -58,10 +58,22 @@
     bindControls();
     slideDurations = new Array(course.slides.length).fill(null);
     preloadAllDurations();
-    const slideParam = parseInt(new URLSearchParams(window.location.search).get('slide'), 10);
+    const urlParams = new URLSearchParams(window.location.search);
+    const slideParam = parseInt(urlParams.get('slide'), 10);
     const startIndex = (!isNaN(slideParam) && slideParam >= 1)
       ? Math.min(slideParam - 1, course.slides.length - 1)
       : 0;
+
+    // If a slide param is present, user came from quiz results — update back button
+    if (!isNaN(slideParam) && slideParam >= 1) {
+      const persona = urlParams.get('persona') || '';
+      const btnBack = $('btn-back');
+      if (btnBack && persona) {
+        btnBack.href = 'quiz.html?persona=' + encodeURIComponent(persona) + '&results=1';
+        btnBack.title = 'Back to Quiz Results';
+      }
+    }
+
     loadSlide(startIndex, false);
 
     requestAnimationFrame(progressLoop);
