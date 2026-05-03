@@ -1,0 +1,90 @@
+{
+  "title": "The Leadership Blueprint — Knowledge Check",
+  "pointsPerQuestion": 2,
+  "questions": [
+    {
+      "id": 1,
+      "type": "Contextualizing Knowledge",
+      "label": "Question 1: Bridging Cultural Distance",
+      "slideRef": 9,
+      "scenario": "You are a US-based leader tasked with launching a strategic initiative with a newly acquired team in Brazil. Based on the concept of Cultural Intelligence (CQ), select the one approach that best aligns with their cultural mechanics for building trust.",
+      "options": [
+        { "label": "A", "text": "Immediately assign strict deadlines and track task completion to demonstrate your reliability." },
+        { "label": "B", "text": "Schedule extended introductory meetings focused on personal backgrounds and social connections before discussing project details." },
+        { "label": "C", "text": "Send an explicit, simple, and transparent directive detailing the project phases." },
+        { "label": "D", "text": "Minimize verbal communication and rely strictly on written protocols to avoid misunderstandings." }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 2,
+      "type": "Application and Problem Solving",
+      "label": "Question 2: Mitigating Virtual Friction",
+      "slideRef": 10,
+      "scenario": "Your geographically dispersed team relies heavily on digital tools. Lately, several remote members have expressed feeling isolated from the headquarters' decisions and believe their opinions carry no weight. Using the SPLIT framework, select the one effective action you should take to mitigate this specific social distance.",
+      "options": [
+        { "label": "A", "text": "Restructure the formal organizational hierarchy to clarify reporting lines." },
+        { "label": "B", "text": "Initiate frequent, brief contact to demonstrate that their individual contributions matter." },
+        { "label": "C", "text": "Standardize your communication terminology to eliminate language barriers." },
+        { "label": "D", "text": "Implement a more advanced AI workflow tool to automate their tasks." }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 3,
+      "type": "Representing Knowledge Differently and Justifying",
+      "label": "Question 3: Diagnosing Artificial Harmony",
+      "slideRef": 11,
+      "scenario": "During a crucial strategy meeting, a controversial new AI workflow is proposed. You notice that team members are politely nodding in agreement, but no one is offering critiques or engaging in passionate debate. Based on Lencioni's model, select the one foundational dysfunction that is primarily driving this artificial harmony.",
+      "options": [
+        { "label": "A", "text": "Avoidance of accountability" },
+        { "label": "B", "text": "Inattention to results" },
+        { "label": "C", "text": "Absence of trust" },
+        { "label": "D", "text": "Lack of commitment" }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": 4,
+      "type": "Exposing Foundational Assumptions and Contradicting Knowledge",
+      "label": "Question 4: Exposing Dangerous Assumptions",
+      "slideRef": 14,
+      "scenario": "Read the statement: \"To demonstrate empathy regarding the transition to Agentic AI, a leader should tell their employees that they feel sorry for the disruption it is causing them.\" Select the one category that applies to this statement based on the course definitions.",
+      "options": [
+        { "label": "A", "text": "Radical Employee Centricity" },
+        { "label": "B", "text": "Empathic Concern" },
+        { "label": "C", "text": "Dangerous Misconception" },
+        { "label": "D", "text": "Stagility" }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": 5,
+      "type": "Predicting Consequences and Sequencing",
+      "label": "Question 5: Harnessing Destructive Arguments",
+      "slideRef": 12,
+      "scenario": "Two senior developers are locked in a heated disagreement over which software architecture to use. Tempers are flaring, and the project is stalling. Select the one immediate action that represents the best use of \"conflict-agility\" to harness this situation constructively.",
+      "options": [
+        { "label": "A", "text": "Apply the \"Smoothing\" strategy and ask one developer to give up their goal to maintain the relationship." },
+        { "label": "B", "text": "Require both developers to use the Claim-Support-Question routine to justify their architectural choices with evidence." },
+        { "label": "C", "text": "Deploy the See-Think-Wonder routine to internally analyze why they are arguing." },
+        { "label": "D", "text": "Step in with a \"Forcing\" strategy to make an executive decision and avoid further delays." }
+      ],
+      "correct": "B"
+    }
+  ],
+  "demoAnswers": {
+    "1": "B",
+    "2": "B",
+    "3": "C",
+    "4": "C",
+    "5": "B"
+  },
+  "levels": [
+    { "min": 0,  "max": 2,  "label": "Novice Performer",       "emoji": "🔴", "color": "#e74c3c" },
+    { "min": 3,  "max": 4,  "label": "Emerging Improviser",    "emoji": "🟠", "color": "#e67e22" },
+    { "min": 5,  "max": 6,  "label": "Capable Applier",        "emoji": "🟡", "color": "#f1c40f" },
+    { "min": 7,  "max": 8,  "label": "Flexible Thinker",       "emoji": "🟢", "color": "#2ecc71" },
+    { "min": 9,  "max": 10, "label": "Master of Understanding","emoji": "🌟", "color": "#3498db" }
+  ]
+}

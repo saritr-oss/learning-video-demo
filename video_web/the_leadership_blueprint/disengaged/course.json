@@ -1,0 +1,110 @@
+{
+  "course": "The Leadership Blueprint",
+  "slides": [
+    {
+      "id": "1",
+      "group": "1",
+      "title": "Introduction to Global Corporate Leadership",
+      "avatar": "videos/Slide_1.mp4",
+      "main": { "type": "image", "src": "slides/1.jpg" }
+    },
+    {
+      "id": "2",
+      "group": "2",
+      "title": "The Demand for 'Bottom Lines' and Active Application",
+      "avatar": "videos/Slide_2.mp4",
+      "main": { "type": "image", "src": "slides/2.jpg" }
+    },
+    {
+      "id": "3",
+      "group": "3",
+      "title": "Module 1 — The Architecture of Self-Awareness",
+      "avatar": "videos/Slide_3.mp4",
+      "main": { "type": "image", "src": "slides/3.jpg" }
+    },
+    {
+      "id": "4",
+      "group": "3",
+      "title": "Cognitive Protocols for Leaders",
+      "avatar": "videos/Slide_4.mp4",
+      "main": { "type": "image", "src": "slides/4.jpg" }
+    },
+    {
+      "id": "5",
+      "group": "3",
+      "title": "Values and Leadership Congruence",
+      "avatar": "videos/Slide_5.mp4",
+      "main": { "type": "image", "src": "slides/5.jpg" }
+    },
+    {
+      "id": "6",
+      "group": "6",
+      "title": "Module 2 — The Interpersonal Matrix and Pillars of Trust",
+      "avatar": "videos/Slide_6.mp4",
+      "main": { "type": "image", "src": "slides/6.jpg" }
+    },
+    {
+      "id": "7",
+      "group": "6",
+      "title": "Introduction to Cultural Intelligence (CQ)",
+      "avatar": "videos/Slide_7.mp4",
+      "main": { "type": "image", "src": "slides/7.jpg" }
+    },
+    {
+      "id": "8",
+      "group": "6",
+      "title": "The Four Facets of CQ and Contextual Application",
+      "avatar": "videos/Slide_8.mp4",
+      "main": { "type": "image", "src": "slides/8.jpg" }
+    },
+    {
+      "id": "9",
+      "group": "6",
+      "title": "Low-Context vs. High-Context Cultures",
+      "avatar": "videos/Slide_9.mp4",
+      "main": { "type": "image", "src": "slides/9.jpg" }
+    },
+    {
+      "id": "10",
+      "group": "10",
+      "title": "Module 3 — Global Team Dynamics and Social Distance",
+      "avatar": "videos/Slide_10.mp4",
+      "main": { "type": "image", "src": "slides/10.jpg" }
+    },
+    {
+      "id": "11",
+      "group": "10",
+      "title": "Team Dysfunctions and the Value of Conflict",
+      "avatar": "videos/Slide_11.mp4",
+      "main": { "type": "image", "src": "slides/11.jpg" }
+    },
+    {
+      "id": "12",
+      "group": "10",
+      "title": "Conflict-Agility and Resolution Strategies",
+      "avatar": "videos/Slide_12.mp4",
+      "main": { "type": "image", "src": "slides/12.jpg" }
+    },
+    {
+      "id": "13",
+      "group": "13",
+      "title": "Module 4 — Agentic AI and Human Workflows",
+      "avatar": "videos/Slide_13.mp4",
+      "main": { "type": "image", "src": "slides/13.jpg" }
+    },
+    {
+      "id": "14",
+      "group": "13",
+      "title": "Stagility, Employee Centricity, and Empathy",
+      "avatar": "videos/Slide_14.mp4",
+      "main": { "type": "image", "src": "slides/14.jpg" }
+    },
+    {
+      "id": "15",
+      "group": "15",
+      "title": "Conclusion — Building a Leadership Philosophy",
+      "avatar": "videos/Slide_15.mp4",
+      "main": { "type": "image", "src": "slides/15.jpg" }
+    }
+  ]
+}

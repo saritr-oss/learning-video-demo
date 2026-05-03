@@ -1,14 +1,14 @@
-// Course data loader — reads from persona JSON files.
-// Usage:  index.html?persona=the_autonomous_architect
-//         index.html?persona=the_disengaged_kinesthetic
-// Falls back to the_disengaged_kinesthetic if no param is given.
+// Course data loader — reads from a tenant-scoped course folder.
+// Usage:  index.html?persona=zoominfo/the_autonomous_architect
+//         index.html?persona=the_leadership_blueprint/architect
+// `persona` is the path (relative to video_web/) of the course folder.
 
 (function () {
   'use strict';
 
   const params  = new URLSearchParams(window.location.search);
-  const persona = params.get('persona') || 'the_disengaged_kinesthetic';
-  const jsonUrl = `persona/${persona}/course.json`;
+  const persona = params.get('persona') || 'zoominfo/the_disengaged_kinesthetic';
+  const jsonUrl = `${persona}/course.json`;
 
   fetch(jsonUrl)
     .then(res => {
@@ -16,9 +16,9 @@
       return res.json();
     })
     .then(data => {
-      // Prefix every relative path with the persona folder so the player
+      // Prefix every relative path with the course folder so the player
       // can resolve videos/ and slides/ correctly.
-      const base = `persona/${persona}/`;
+      const base = `${persona}/`;
       data.slides.forEach(slide => {
         if (slide.avatar) slide.avatar = base + slide.avatar;
         if (slide.main && slide.main.src) slide.main.src = base + slide.main.src;
@@ -39,7 +39,7 @@
            <h2>⚠️ Could not load course data</h2>
            <p>${err.message}</p>
            <p>Make sure you are serving via a local HTTP server and the
-              <code>persona/</code> folder exists.</p>
+              course folder exists at <code>${persona}/</code>.</p>
          </div>`;
     });
 })();

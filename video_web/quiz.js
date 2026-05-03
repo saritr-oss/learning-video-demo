@@ -21,7 +21,7 @@
     if (!_persona) {
         window.location.href = 'select.html';
     } else {
-        fetch('persona/' + _persona + '/quiz.json')
+        fetch(_persona + '/quiz.json')
             .then(function (r) {
                 if (!r.ok) throw new Error('no quiz');
                 return r.json();

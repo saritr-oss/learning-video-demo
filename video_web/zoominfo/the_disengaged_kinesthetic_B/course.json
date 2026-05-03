@@ -1,0 +1,142 @@
+{
+  "course": "The Disengaged Kinesthetic",
+  "audioOnly": true,
+  "theme": "assets/theme.png",
+  "slides": [
+    {
+      "id": "1",
+      "group": "1",
+      "title": "Welcome & Connecting Across Differences",
+      "avatar": "audio/Slide_1.mp3",
+      "frames": [
+        {
+          "src": "slides/1.jpg",
+          "duration": 3
+        },
+        {
+          "src": "slides/1_1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "group": "2",
+      "title": "The Foundation: Getting to Know Your Team",
+      "avatar": "audio/Slide_2.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/2.jpg"
+      }
+    },
+    {
+      "id": "3",
+      "group": "3",
+      "title": "The First 1:1: Setting the Stage",
+      "avatar": "audio/Slide_3.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/3.jpg"
+      }
+    },
+    {
+      "id": "4",
+      "group": "4",
+      "title": "Team Alignment & Bonding",
+      "avatar": "audio/Slide_4.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/4.jpg"
+      }
+    },
+    {
+      "id": "5",
+      "group": "5",
+      "title": "Communicating Effectively: The Basics",
+      "avatar": "audio/Slide_5.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/5.jpg"
+      }
+    },
+    {
+      "id": "6",
+      "group": "6",
+      "title": "Tactics for Distributed Teams",
+      "avatar": "audio/Slide_6.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/6.jpg"
+      }
+    },
+    {
+      "id": "7",
+      "group": "7",
+      "title": "Decoding Culture & Feedback",
+      "avatar": "audio/Slide_7.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/7.jpg"
+      }
+    },
+    {
+      "id": "8",
+      "group": "8",
+      "title": "Operationalize: Leading Across Time Zones",
+      "avatar": "audio/Slide_8.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/8.jpg"
+      }
+    },
+    {
+      "id": "9",
+      "group": "9",
+      "title": "Operational Expectations & Documentation",
+      "avatar": "audio/Slide_9.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/9.jpg"
+      }
+    },
+    {
+      "id": "10",
+      "group": "10",
+      "title": "Global Benefits Overview",
+      "avatar": "audio/Slide_10.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/10.jpg"
+      }
+    },
+    {
+      "id": "11",
+      "group": "11",
+      "title": "Managing Holidays & Leave",
+      "avatar": "audio/Slide_11.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/11.jpg"
+      }
+    },
+    {
+      "id": "12",
+      "group": "12",
+      "title": "Deep Dive: Local Working Cultures",
+      "avatar": "audio/Slide_12.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/12.jpg"
+      }
+    },
+    {
+      "id": "13",
+      "group": "13",
+      "title": "Conclusion & Continued Learning",
+      "avatar": "audio/Slide_13.mp3",
+      "main": {
+        "type": "image",
+        "src": "slides/13.jpg"
+      }
+    }
+  ]
+}

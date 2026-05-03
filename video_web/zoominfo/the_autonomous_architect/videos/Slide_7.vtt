@@ -1,0 +1,89 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.000
+So why do we use void instead of delete because in financial systems?
+
+2
+00:00:05.000 --> 00:00:10.300
+Transparency is always more important than Erasure. Every action must remain
+
+3
+00:00:10.300 --> 00:00:15.800
+visible to preserve the Integrity of the audit Trail. The logic as an architect
+
+4
+00:00:15.800 --> 00:00:20.500
+of financial systems, you must choose between deleting and voiding. An
+
+5
+00:00:20.500 --> 00:00:25.100
+erroneous entry before proceeding outline, your logical, and ethical
+
+6
+00:00:25.100 --> 00:00:29.800
+considerations for each action, which action aligns. Best with the fundamental
+
+7
+00:00:29.800 --> 00:00:35.600
+principles of transparency, ordered ability and financial integrity, and why?
+
+8
+00:00:35.600 --> 00:00:41.200
+Now, let's rigorously, analyzed the imperative behind void consumption. Why do
+
+9
+00:00:41.200 --> 00:00:45.899
+we introduced this seemingly more complex concept instead of a simple delete
+
+10
+00:00:45.899 --> 00:00:51.799
+function because robust Financial systems. Demand a perfect unalterable audit
+
+11
+00:00:51.799 --> 00:00:57.200
+Trail as their foundational principle. The critique deleting this action
+
+12
+00:00:57.200 --> 00:01:02.899
+fundamentally erases history It obliterates any record of the original mistake,
+
+13
+00:01:02.899 --> 00:01:07.200
+making it impossible for Auditors, or investigators to understand what
+
+14
+00:01:07.200 --> 00:01:12.299
+transpired if an auditor asks. What happened here, there is no traceable
+
+15
+00:01:12.299 --> 00:01:16.599
+record, leading to significant compliance issues, and a complete lack of
+
+16
+00:01:16.599 --> 00:01:22.099
+transparency, voiding, conversely voiding meticulously preserves a complete
+
+17
+00:01:22.099 --> 00:01:28.599
+record it records, both the original erroneous, entry EG plus 5 units, and the
+
+18
+00:01:28.599 --> 00:01:34.700
+immediate offsetting correction EG minus 5 units. This creates an indelible
+
+19
+00:01:34.700 --> 00:01:39.400
+transparent. Historical Narrative of the transaction, the era and its
+
+20
+00:01:39.400 --> 00:01:45.099
+systematic rectification. Key term void consumption, internalized, this term,
+
+21
+00:01:45.099 --> 00:01:50.400
+it is the definitive sign of a transparent compliant and auditable correction
+
+22
+00:01:50.400 --> 00:01:53.599
+process within any sophisticated Financial system.

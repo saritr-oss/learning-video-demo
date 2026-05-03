@@ -1,0 +1,113 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.099
+Let's talk about the five minute heartbeat. This refers to the short
+
+2
+00:00:04.099 --> 00:00:08.699
+integration gap between our systems. The time it takes for data to move from
+
+3
+00:00:08.699 --> 00:00:14.000
+Cooper into sap understanding. This latency is important because even a brief
+
+4
+00:00:14.000 --> 00:00:18.699
+delay, can have strategic and operational implications after you meticulously
+
+5
+00:00:18.699 --> 00:00:24.399
+submit the goods, receipt or avoid transaction. In Cooper, you may be tempted
+
+6
+00:00:24.399 --> 00:00:28.899
+to immediately. Check SAP for confirmation. However, this immediate
+
+7
+00:00:28.899 --> 00:00:33.799
+verification could lead to frustration and erroneous conclusions. The Gap.
+
+8
+00:00:33.799 --> 00:00:39.100
+Cooper and sap are inherently separate systems. They do not maintain a
+
+9
+00:00:39.100 --> 00:00:44.700
+real-time instantaneous sink, instead, they operate on a periodic, scheduled
+
+10
+00:00:44.700 --> 00:00:49.500
+integration cycle, the rule, the interface connecting these two critical
+
+11
+00:00:49.500 --> 00:00:55.100
+systems. Runs on a precisely defined five minutes cycle. Instruction, it is a
+
+12
+00:00:55.100 --> 00:00:59.100
+critical operational rule that, you must wait, at least five minutes after
+
+13
+00:00:59.100 --> 00:01:03.700
+submitting. Any transaction in Cooper before attempting to verify Its
+
+14
+00:01:03.700 --> 00:01:08.500
+Reflection In sap failure to adhere to this can lead to perceived data,
+
+15
+00:01:08.500 --> 00:01:13.700
+discrepancies verification. If you check SAP prematurely the record will
+
+16
+00:01:13.700 --> 00:01:18.799
+demonstrably not be there leading to false negatives and potential. Distrust in
+
+17
+00:01:18.799 --> 00:01:23.400
+the system. You are waiting for the system to successfully, generate a material
+
+18
+00:01:23.400 --> 00:01:29.099
+document number, a unique sap. Specific identifiers typically, starting with
+
+19
+00:01:29.099 --> 00:01:35.599
+5,000 strategic and operational implications of integration. Latency consider
+
+20
+00:01:35.599 --> 00:01:40.799
+the operational and financial consequences of consistently checking sap before
+
+21
+00:01:40.799 --> 00:01:45.799
+the five minutes sink. How could this delay impact trust in the systems data
+
+22
+00:01:45.799 --> 00:01:51.200
+Integrity? Lead to erroneous decisions based on incomplete information or
+
+23
+00:01:51.200 --> 00:01:56.500
+create unnecessary. Operational bottlenecks predict the potential operational,
+
+24
+00:01:56.500 --> 00:02:01.900
+bottlenecks Financial mistakes or Ordered complexities. That could arise if a
+
+25
+00:02:01.900 --> 00:02:06.299
+team consistently fails to account for the five-minute integration delay
+
+26
+00:02:06.299 --> 00:02:11.500
+between Cooper and Sapp propose a concise, communication strategy, to ensure
+
+27
+00:02:11.500 --> 00:02:16.300
+all relevant, stakeholders understand this critical latency and its
+
+28
+00:02:16.300 --> 00:02:19.000
+implications justifying your approach.

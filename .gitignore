@@ -10,3 +10,10 @@ __pycache__/
 # OS files
 .DS_Store
 Thumbs.db
+
+# IDE / editor state
+.idea/
+.claude/scheduled_tasks.lock
+
+# Generated avatar videos (regenerable via demo/pdf_to_videos.py)
+demo/video/output/

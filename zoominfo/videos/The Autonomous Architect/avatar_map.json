@@ -1,0 +1,7 @@
+{
+  "default": "english_man_small.png",
+  "slides": {
+    "Slide_1_Welcome_to_The_Digital_Handshake": "english_man.png",
+    "Slide_15_As_we_close_this_course": "english_man.png"
+  }
+}

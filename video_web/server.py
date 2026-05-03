@@ -23,16 +23,59 @@ ENV = load_env()
 DEV_MODE = ENV.get("DEV", "").lower() in ("1", "true", "yes")
 if DEV_MODE:
     print("⚠️  DEV MODE: authentication disabled")
-# Cloud Run uses OS environment variables; .env file is for local dev
-USER1_NAME = ENV.get("USER1_NAME") or os.environ.get("USER1_NAME", "autonomous")
-USER1_PASS = ENV.get("USER1_PASS") or os.environ.get("USER1_PASS", "architect123")
-USER2_NAME = ENV.get("USER2_NAME") or os.environ.get("USER2_NAME", "kinesthetic")
-USER2_PASS = ENV.get("USER2_PASS") or os.environ.get("USER2_PASS", "disengaged123")
 
-# Super simple session tracking (in memory)
-SESSIONS = set()
+# Cloud Run uses OS environment variables; .env file is for local dev
+USER1_NAME = ENV.get("USER1_NAME") or os.environ.get("USER1_NAME", "zoominfo")
+USER1_PASS = ENV.get("USER1_PASS") or os.environ.get("USER1_PASS", "zoominfo650!")
+USER2_NAME = ENV.get("USER2_NAME") or os.environ.get("USER2_NAME", "demo")
+USER2_PASS = ENV.get("USER2_PASS") or os.environ.get("USER2_PASS", "demo250!")
+
+# Map each user to a tenant (folder under video_web/)
+USER_TENANTS = {
+    USER1_NAME: "zoominfo",
+    USER2_NAME: "the_leadership_blueprint",
+}
+
+# Course catalog rendered into select.html per tenant
+COURSE_MANIFEST = {
+    "zoominfo": [
+        {"path": "zoominfo/the_autonomous_architect",    "title": "SAP & Coupa Goods Receipt",   "subtitle": "Persona A: The Autonomous Architect",  "icon": "🏛️"},
+        {"path": "zoominfo/the_disengaged_kinesthetic",  "title": "SAP & Coupa Goods Receipt",   "subtitle": "Persona B: The Disengaged Kinesthetic", "icon": "⚡"},
+        {"path": "zoominfo/the_autonomous_architect_B",  "title": "Building Cultural Awareness", "subtitle": "Persona A: The Autonomous Architect",  "icon": "🎧"},
+        {"path": "zoominfo/the_disengaged_kinesthetic_B","title": "Building Cultural Awareness", "subtitle": "Persona B: The Disengaged Kinesthetic", "icon": "🎧"},
+    ],
+    "the_leadership_blueprint": [
+        {"path": "the_leadership_blueprint/architect",   "title": "The Leadership Blueprint",    "subtitle": "Persona A: The Autonomous Architect",  "icon": "🏛️"},
+        {"path": "the_leadership_blueprint/disengaged",  "title": "The Leadership Blueprint",    "subtitle": "Persona B: The Disengaged Kinesthetic", "icon": "⚡"},
+    ],
+}
+
+# session_id -> tenant
+SESSIONS = {}
+
+
+def render_cards(tenant):
+    parts = []
+    for c in COURSE_MANIFEST.get(tenant, []):
+        parts.append(
+            f'        <a href="index.html?persona={c["path"]}" class="persona-card">\n'
+            f'            <div class="icon">{c["icon"]}</div>\n'
+            f'            <div class="title">{c["title"]}</div>\n'
+            f'            <div class="desc">{c["subtitle"]}</div>\n'
+            f'        </a>'
+        )
+    return '\n'.join(parts)
+
 
 class AuthHandler(http.server.SimpleHTTPRequestHandler):
+    def session_tenant(self):
+        cookie_header = self.headers.get('Cookie')
+        if cookie_header:
+            cookie = http.cookies.SimpleCookie(cookie_header)
+            if 'session_id' in cookie:
+                return SESSIONS.get(cookie['session_id'].value)
+        return None
+
     def check_auth(self):
         if DEV_MODE:
             return True
@@ -41,12 +84,7 @@ class AuthHandler(http.server.SimpleHTTPRequestHandler):
         if self.path in ['/login.html', '/assets/logo.png', '/login'] or self.path.startswith('/styles.css'):
             return True
 
-        cookie_header = self.headers.get('Cookie')
-        if cookie_header:
-            cookie = http.cookies.SimpleCookie(cookie_header)
-            if 'session_id' in cookie and cookie['session_id'].value in SESSIONS:
-                return True
-        return False
+        return self.session_tenant() is not None
 
     def do_GET(self):
         if not self.check_auth():
@@ -54,14 +92,32 @@ class AuthHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Location', '/login.html')
             self.end_headers()
             return
-            
-        # Parse the URL to see if it's the root path with NO persona selected
+
         parsed_path = urllib.parse.urlparse(self.path)
         if parsed_path.path in ['/', '/index.html'] and not parsed_path.query:
             self.send_response(302)
             self.send_header('Location', '/select.html')
             self.end_headers()
             return
+
+        # Render select.html with tenant-specific cards
+        if parsed_path.path == '/select.html':
+            tenant = self.session_tenant() or "zoominfo"
+            template_path = os.path.join(os.path.dirname(__file__), 'select.html')
+            try:
+                with open(template_path, 'r', encoding='utf-8') as f:
+                    template = f.read()
+                rendered = template.replace('<!--COURSES-->', render_cards(tenant))
+                body = rendered.encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+                return
+            except OSError as e:
+                self.send_error(500, f"Failed to render select.html: {e}")
+                return
 
         super().do_GET()
 
@@ -70,19 +126,19 @@ class AuthHandler(http.server.SimpleHTTPRequestHandler):
             content_length = int(self.headers.get('Content-Length', 0))
             post_data = self.rfile.read(content_length).decode('utf-8')
             parsed_data = urllib.parse.parse_qs(post_data)
-            
+
             username = parsed_data.get('username', [''])[0]
             password = parsed_data.get('password', [''])[0]
-            
-            is_valid = False
+
+            tenant = None
             if username == USER1_NAME and password == USER1_PASS:
-                is_valid = True
+                tenant = USER_TENANTS[USER1_NAME]
             elif username == USER2_NAME and password == USER2_PASS:
-                is_valid = True
-                
-            if is_valid:
+                tenant = USER_TENANTS[USER2_NAME]
+
+            if tenant:
                 session_id = os.urandom(16).hex()
-                SESSIONS.add(session_id)
+                SESSIONS[session_id] = tenant
                 self.send_response(302)
                 self.send_header('Set-Cookie', f'session_id={session_id}; HttpOnly; Path=/')
                 self.send_header('Location', '/select.html')

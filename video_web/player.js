@@ -294,7 +294,7 @@
       // Last slide ended — check if a quiz exists for this persona before navigating
       const persona = new URLSearchParams(window.location.search).get('persona') || '';
       if (!persona) return; // no persona, stay put
-      fetch('persona/' + persona + '/quiz.json', { method: 'HEAD' })
+      fetch(persona + '/quiz.json', { method: 'HEAD' })
         .then(function (r) {
           if (r.ok) {
             window.location.href = 'quiz.html?persona=' + encodeURIComponent(persona);

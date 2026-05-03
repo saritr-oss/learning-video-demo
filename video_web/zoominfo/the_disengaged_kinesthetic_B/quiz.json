@@ -1,0 +1,63 @@
+{
+  "title": "Global Leadership Quick Check",
+  "pointsPerQuestion": 2,
+  "questions": [
+    {
+      "id": 1,
+      "type": "Scenario",
+      "label": "Scenario 1: Scheduling a Meeting",
+      "slideRef": 8,
+      "scenario": "You're trying to schedule a meeting with a global team member. What's the best approach?",
+      "options": [
+        { "label": "A", "text": "Pick a time that works for you." },
+        { "label": "B", "text": "Intentionally find the schedule overlap rather than forcing your hours." },
+        { "label": "C", "text": "Schedule it for late night for one team, early morning for another." }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 2,
+      "type": "Scenario",
+      "label": "Scenario 2: Disconnected Team Member",
+      "slideRef": 4,
+      "scenario": "An employee expresses that they feel disconnected from the team. What do you do?",
+      "options": [
+        { "label": "A", "text": "Tell them to try harder to connect." },
+        { "label": "B", "text": "Reassure them, then investigate why they feel disconnected, and work to bond with them." },
+        { "label": "C", "text": "Ignore it, hoping it will pass." }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 3,
+      "type": "Scenario",
+      "label": "Scenario 3: Communication Style",
+      "slideRef": 5,
+      "scenario": "How should you adapt to someone's communication style?",
+      "options": [
+        { "label": "A", "text": "Guess what they prefer." },
+        { "label": "B", "text": "Expect them to adapt to your style." },
+        { "label": "C", "text": "Document their preferred communication style instead of guessing." }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": 4,
+      "type": "Scenario",
+      "label": "Scenario 4: Meeting Priorities",
+      "slideRef": 6,
+      "scenario": "Are live meetings the only priority for global teams?",
+      "options": [
+        { "label": "A", "text": "Yes, live meetings are always best." },
+        { "label": "B", "text": "No, treat asynchronous norms as just as important as live meetings." },
+        { "label": "C", "text": "Only schedule live meetings if absolutely necessary." }
+      ],
+      "correct": "B"
+    }
+  ],
+  "levels": [
+    { "min": 0, "max": 3, "label": "Low Understanding", "emoji": "🔴", "color": "#e74c3c" },
+    { "min": 4, "max": 6, "label": "Moderate Understanding", "emoji": "🟡", "color": "#f1c40f" },
+    { "min": 7, "max": 8, "label": "High Understanding", "emoji": "🟢", "color": "#2ecc71" }
+  ]
+}

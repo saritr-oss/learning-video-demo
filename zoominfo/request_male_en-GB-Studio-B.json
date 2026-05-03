@@ -1,0 +1,14 @@
+{
+    "input": {
+        "text": "Title: The Digital Handshake: SAP & Coupa Goods Receipt Tutorial\nSubtitle: Transforming Physical Delivery into Financial Liability\nCourse Objective: By the end of this module, learners will be able to perform a Goods Receipt in\nCoupa, verify it in SAP, understand the profound financial implications of this process within the\ncorporate audit trail, and critically analyze its systemic vulnerabilities.\nIntroduction: Welcome, architect of financial integrity. Consider this \"Big Question\": How does\nthe mere arrival of a physical package transform into a definitive, auditable financial liability\nwithin our complex enterprise systems? This course is your path to mastering that\ntransformation. In the modern supply chain, the movement of a physical box, however tangible,\nis systematically meaningless to the finance department until it is meticulously mirrored by a\nprecise digital action. This module focuses on your critical role in bridging the physical and\ndigital realities through the \"Goods Receipt\" process, specifically mastering the intricate\ninteraction and interdependencies between our front-end system, Coupa, and our back-end\nfinancial ledger, SAP. Your precise execution here is not a simple task; it is an act of\nprofessional mastery that underpins the very integrity of our financial records."
+    },
+    "voice": {
+        "languageCode": "en-GB",
+        "name": "en-GB-Studio-B"
+    },
+    "audioConfig": {
+        "audioEncoding": "MP3",
+        "speakingRate": 0.81,
+        "pitch": 0.0
+    }
+}
