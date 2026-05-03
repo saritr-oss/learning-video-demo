@@ -87,6 +87,19 @@ class AuthHandler(http.server.SimpleHTTPRequestHandler):
         return self.session_tenant() is not None
 
     def do_GET(self):
+        # Logout: clear server-side session and the cookie, then redirect
+        if self.path == '/logout':
+            cookie_header = self.headers.get('Cookie')
+            if cookie_header:
+                cookie = http.cookies.SimpleCookie(cookie_header)
+                if 'session_id' in cookie:
+                    SESSIONS.pop(cookie['session_id'].value, None)
+            self.send_response(302)
+            self.send_header('Set-Cookie', 'session_id=; HttpOnly; Path=/; Max-Age=0')
+            self.send_header('Location', '/login.html')
+            self.end_headers()
+            return
+
         if not self.check_auth():
             self.send_response(302)
             self.send_header('Location', '/login.html')

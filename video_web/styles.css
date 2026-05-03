@@ -99,6 +99,56 @@ body {
   box-shadow: 0 0 14px var(--accent-glow);
 }
 
+#btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  color: #ff8a8a;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: all 0.2s;
+  background: rgba(255, 107, 107, 0.08);
+}
+
+#btn-logout:hover {
+  color: #fff;
+  background: #ff6b6b;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 14px rgba(255, 107, 107, 0.4);
+}
+
+.select-logout {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  height: 32px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  color: #ff8a8a;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  background: rgba(255, 107, 107, 0.08);
+  transition: all 0.2s;
+}
+
+.select-logout:hover {
+  color: #fff;
+  background: #ff6b6b;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 14px rgba(255, 107, 107, 0.4);
+}
+
 #course-title {
   font-size: 14px;
   font-weight: 500;
@@ -168,6 +218,24 @@ body {
 
 #avatar-video.blank {
   visibility: hidden;
+}
+
+/* Leadership Blueprint avatars: fix the slot to a 540x540 box and
+   show the entire video inside it (letterboxed if aspect doesn't match). */
+body.tenant-the-leadership-blueprint #avatar-slot {
+  width: 540px;
+  height: 540px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.tenant-the-leadership-blueprint #avatar-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* ── Navigation ── */

@@ -10,6 +10,10 @@
   const persona = params.get('persona') || 'zoominfo/the_disengaged_kinesthetic';
   const jsonUrl = `${persona}/course.json`;
 
+  // Body class so styles.css can scope per-tenant tweaks
+  const tenantSlug = persona.split('/')[0].replace(/_/g, '-');
+  document.body.classList.add('tenant-' + tenantSlug);
+
   fetch(jsonUrl)
     .then(res => {
       if (!res.ok) throw new Error(`Failed to load ${jsonUrl} (${res.status})`);
