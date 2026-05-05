@@ -1,0 +1,90 @@
+{
+  "title": "Accelerating Sales with AWS — Knowledge Check",
+  "pointsPerQuestion": 2,
+  "questions": [
+    {
+      "id": 1,
+      "type": "Contextualizing Knowledge",
+      "label": "Question 1: Navigating Internal Motivations",
+      "slideRef": 9,
+      "scenario": "Understanding your counterpart's financial targets is critical. Across AWS personas — Account Manager (AM), Partner Sales Manager (PSM), and Partner Development Manager (PDM) — select the one Goal Badge that accurately reflects the Partner Sales Manager's specific financial motivation.",
+      "options": [
+        { "label": "A", "text": "Increase Direct AWS Spend" },
+        { "label": "B", "text": "Drive Marketplace Purchases" },
+        { "label": "C", "text": "Grow Partner-Allocated Spend" },
+        { "label": "D", "text": "Improve Regional Partnership KPIs" }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": 2,
+      "type": "Application and Problem Solving",
+      "label": "Question 2: Pitching the Account Manager",
+      "slideRef": 11,
+      "scenario": "You are on a virtual call with an AWS Account Manager who says, \"AppsFlyer is a SaaS solution; it won't immediately expand my customer's cloud compute spend today. Why should I help you?\" Select the one effective pitch to win their advocacy.",
+      "options": [
+        { "label": "A", "text": "We offer a trusted entry point into protected marketing budgets." },
+        { "label": "B", "text": "As our platform scales their marketing, their overall AWS infrastructure will organically scale." },
+        { "label": "C", "text": "Our marketplace revenue is growing 4x YoY." },
+        { "label": "D", "text": "We offer massive AWS compute discounts." }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 3,
+      "type": "Representing Knowledge Differently and Justifying",
+      "label": "Question 3: Dismantling Bureaucracy",
+      "slideRef": 15,
+      "scenario": "Your deal is stuck. The customer's IT and Finance departments are blocking the purchase due to budget constraints. Select the one correct mechanism that Marketplace co-selling enables to fundamentally overcome these budget constraints by reducing the \"Buyer Cost-Sensitivity\" meter.",
+      "options": [
+        { "label": "A", "text": "Retire up to 25% of Enterprise Discount Plan (EDP) commitments via Marketplace purchases." },
+        { "label": "B", "text": "Allow the customer to bypass procurement review by utilizing pre-approved AWS credits." },
+        { "label": "C", "text": "Utilize the customer's unspent AWS committed spend (EDP/CPO) before year-end expiration." },
+        { "label": "D", "text": "Convert a portion of AppsFlyer's SaaS purchase into the customer's AWS spending commitment." }
+      ],
+      "correct": "D"
+    },
+    {
+      "id": 4,
+      "type": "Exposing Foundational Assumptions and Contradicting Knowledge",
+      "label": "Question 4: Exposing Dangerous Assumptions",
+      "slideRef": 8,
+      "scenario": "Read the statement: \"AWS Account Managers expect us to resell their cloud infrastructure.\" Select the one category that applies to this statement.",
+      "options": [
+        { "label": "A", "text": "Co-Selling Advantage" },
+        { "label": "B", "text": "Dangerous Misconception" },
+        { "label": "C", "text": "Relating to Marketplace" },
+        { "label": "D", "text": "Financial Strategy" }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 5,
+      "type": "Predicting Consequences and Sequencing",
+      "label": "Question 5: Flawless Execution",
+      "slideRef": 20,
+      "scenario": "You have just identified a massive Tier-1 enterprise account where AWS co-selling will provide a definitive, deal-winning edge. Select the one action that represents the most critical, immediate, and high-impact step to secure AWS support.",
+      "options": [
+        { "label": "A", "text": "Open an internal ad-hoc request ASAP." },
+        { "label": "B", "text": "Proactively reach out to your Partner Development Manager (PDM) to establish momentum." },
+        { "label": "C", "text": "Utilize the specific outreach templates and playbooks on the AppsFlyer AWS Hub." },
+        { "label": "D", "text": "Pitch the AWS rep on the deal mechanics since they aren't marketing-savvy." }
+      ],
+      "correct": "C"
+    }
+  ],
+  "demoAnswers": {
+    "1": "C",
+    "2": "B",
+    "3": "D",
+    "4": "B",
+    "5": "C"
+  },
+  "levels": [
+    { "min": 0,  "max": 2,  "label": "Novice Performer",       "emoji": "🔴", "color": "#e74c3c" },
+    { "min": 3,  "max": 4,  "label": "Emerging Improviser",    "emoji": "🟠", "color": "#e67e22" },
+    { "min": 5,  "max": 6,  "label": "Capable Applier",        "emoji": "🟡", "color": "#f1c40f" },
+    { "min": 7,  "max": 8,  "label": "Flexible Thinker",       "emoji": "🟢", "color": "#2ecc71" },
+    { "min": 9,  "max": 10, "label": "Master of Understanding","emoji": "🌟", "color": "#3498db" }
+  ]
+}

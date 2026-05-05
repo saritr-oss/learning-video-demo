@@ -17,3 +17,4 @@ Thumbs.db
 
 # Generated avatar videos (regenerable via demo/pdf_to_videos.py)
 demo/video/output/
+appsflyer/video/output/

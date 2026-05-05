@@ -29,11 +29,14 @@ USER1_NAME = ENV.get("USER1_NAME") or os.environ.get("USER1_NAME", "zoominfo")
 USER1_PASS = ENV.get("USER1_PASS") or os.environ.get("USER1_PASS", "zoominfo650!")
 USER2_NAME = ENV.get("USER2_NAME") or os.environ.get("USER2_NAME", "demo")
 USER2_PASS = ENV.get("USER2_PASS") or os.environ.get("USER2_PASS", "demo250!")
+USER3_NAME = ENV.get("USER3_NAME") or os.environ.get("USER3_NAME", "appsflyer")
+USER3_PASS = ENV.get("USER3_PASS") or os.environ.get("USER3_PASS", "apps350!")
 
 # Map each user to a tenant (folder under video_web/)
 USER_TENANTS = {
     USER1_NAME: "zoominfo",
     USER2_NAME: "the_leadership_blueprint",
+    USER3_NAME: "appsflyer",
 }
 
 # Course catalog rendered into select.html per tenant
@@ -47,6 +50,10 @@ COURSE_MANIFEST = {
     "the_leadership_blueprint": [
         {"path": "the_leadership_blueprint/architect",   "title": "The Leadership Blueprint",    "subtitle": "Persona A: The Autonomous Architect",  "icon": "🏛️"},
         {"path": "the_leadership_blueprint/disengaged",  "title": "The Leadership Blueprint",    "subtitle": "Persona B: The Disengaged Kinesthetic", "icon": "⚡"},
+    ],
+    "appsflyer": [
+        {"path": "appsflyer/architect",   "title": "Accelerating Sales with AWS", "subtitle": "Persona A: The Autonomous Architect",  "icon": "🏛️"},
+        {"path": "appsflyer/disengaged",  "title": "Accelerating Sales with AWS", "subtitle": "Persona B: The Disengaged Kinesthetic", "icon": "⚡"},
     ],
 }
 
@@ -68,6 +75,15 @@ def render_cards(tenant):
 
 
 class AuthHandler(http.server.SimpleHTTPRequestHandler):
+    def handle_one_request(self):
+        # Browsers routinely drop video range requests when the user
+        # navigates between slides. Swallow the resulting socket errors
+        # so the server log stays readable.
+        try:
+            super().handle_one_request()
+        except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
+            self.close_connection = True
+
     def session_tenant(self):
         cookie_header = self.headers.get('Cookie')
         if cookie_header:
@@ -148,6 +164,8 @@ class AuthHandler(http.server.SimpleHTTPRequestHandler):
                 tenant = USER_TENANTS[USER1_NAME]
             elif username == USER2_NAME and password == USER2_PASS:
                 tenant = USER_TENANTS[USER2_NAME]
+            elif username == USER3_NAME and password == USER3_PASS:
+                tenant = USER_TENANTS[USER3_NAME]
 
             if tenant:
                 session_id = os.urandom(16).hex()
@@ -164,13 +182,13 @@ class AuthHandler(http.server.SimpleHTTPRequestHandler):
             self.send_error(404, "Not Found")
 
 # Prevent port conflicts by allowing reuse
-socketserver.TCPServer.allow_reuse_address = True
+http.server.ThreadingHTTPServer.allow_reuse_address = True
 
 PORT = int(os.environ.get("PORT", 8080))
 Handler = AuthHandler
 
 try:
-    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    with http.server.ThreadingHTTPServer(("", PORT), Handler) as httpd:
         print(f"Secure server listening at http://localhost:{PORT}")
         print("Press Ctrl+C to stop.")
         httpd.serve_forever()

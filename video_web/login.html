@@ -91,6 +91,41 @@
             background: rgba(0, 0, 0, 0.4);
         }
 
+        .password-wrap {
+            position: relative;
+        }
+
+        .password-wrap input {
+            padding-right: 44px;
+        }
+
+        .toggle-pw {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            transform: translateY(-50%);
+            background: transparent;
+            border: 0;
+            padding: 6px;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: color 0.15s, background 0.15s;
+        }
+
+        .toggle-pw:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .toggle-pw svg {
+            width: 18px;
+            height: 18px;
+        }
+
         .btn-submit {
             width: 100%;
             padding: 14px;
@@ -137,7 +172,15 @@
             </div>
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" name="password" required autocomplete="current-password" placeholder="••••••••">
+                <div class="password-wrap">
+                    <input id="pw-input" type="password" name="password" required autocomplete="current-password" placeholder="••••••••">
+                    <button type="button" id="toggle-pw" class="toggle-pw" aria-label="Show password" title="Show password">
+                        <svg id="pw-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
             <button type="submit" class="btn-submit">Sign In to Continue</button>
         </form>
@@ -149,6 +192,23 @@
             document.getElementById('error-msg').style.display = 'block';
             window.history.replaceState({}, document.title, window.location.pathname);
         }
+
+        // Show / hide password toggle
+        (function () {
+            const btn = document.getElementById('toggle-pw');
+            const input = document.getElementById('pw-input');
+            const icon = document.getElementById('pw-icon');
+            const eyeOpen = '<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>';
+            const eyeOff = '<path d="M17.94 17.94A10.06 10.06 0 0 1 12 19c-7 0-11-7-11-7a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/>';
+            btn.addEventListener('click', function () {
+                const showing = input.type === 'text';
+                input.type = showing ? 'password' : 'text';
+                icon.innerHTML = showing ? eyeOpen : eyeOff;
+                const label = showing ? 'Show password' : 'Hide password';
+                btn.setAttribute('aria-label', label);
+                btn.setAttribute('title', label);
+            });
+        })();
     </script>
 </body>
 

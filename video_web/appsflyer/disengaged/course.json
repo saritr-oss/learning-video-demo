@@ -1,0 +1,166 @@
+{
+  "course": "Accelerating Sales with AWS",
+  "slides": [
+    {
+      "id": "1",
+      "group": "1",
+      "title": "Why AWS Invests in AppsFlyer's Growth",
+      "avatar": "videos/Slide_1.mp4",
+      "main": { "type": "image", "src": "slides/1.jpg" }
+    },
+    {
+      "id": "2",
+      "group": "1",
+      "title": "Hyperscalers Lean on Software Partnerships",
+      "avatar": "videos/Slide_2.mp4",
+      "main": { "type": "image", "src": "slides/2.jpg" }
+    },
+    {
+      "id": "3",
+      "group": "3",
+      "title": "AWS — The Undisputed Market Leader",
+      "avatar": "videos/Slide_3.mp4",
+      "main": { "type": "image", "src": "slides/3.jpg" }
+    },
+    {
+      "id": "4",
+      "group": "3",
+      "title": "Riding the Cloud Adoption Wave",
+      "avatar": "videos/Slide_4.mp4",
+      "main": { "type": "image", "src": "slides/4.jpg" }
+    },
+    {
+      "id": "5",
+      "group": "3",
+      "title": "The ARR Growth Engine",
+      "avatar": "videos/Slide_5.mp4",
+      "main": { "type": "image", "src": "slides/5.jpg" }
+    },
+    {
+      "id": "6",
+      "group": "3",
+      "title": "Three Pillars of the Strategic Alliance",
+      "avatar": "videos/Slide_6.mp4",
+      "main": { "type": "image", "src": "slides/6.jpg" }
+    },
+    {
+      "id": "7",
+      "group": "3",
+      "title": "Tactical Advantages for Sales Professionals",
+      "avatar": "videos/Slide_7.mp4",
+      "main": { "type": "image", "src": "slides/7.jpg" }
+    },
+    {
+      "id": "8",
+      "group": "8",
+      "title": "Module 2 — The Co-Sell Motion: A Dangerous Misconception",
+      "avatar": "videos/Slide_8.mp4",
+      "main": { "type": "image", "src": "slides/8.jpg" }
+    },
+    {
+      "id": "9",
+      "group": "8",
+      "title": "Mapping Internal AWS Roles & Targets",
+      "avatar": "videos/Slide_9.mp4",
+      "main": { "type": "image", "src": "slides/9.jpg" }
+    },
+    {
+      "id": "10",
+      "group": "8",
+      "title": "Selling to the Account Manager's Quota",
+      "avatar": "videos/Slide_10.mp4",
+      "main": { "type": "image", "src": "slides/10.jpg" }
+    },
+    {
+      "id": "11",
+      "group": "8",
+      "title": "Strategy A vs. Strategy B — Aligning Incentives",
+      "avatar": "videos/Slide_11.mp4",
+      "main": { "type": "image", "src": "slides/11.jpg" }
+    },
+    {
+      "id": "12",
+      "group": "12",
+      "title": "Module 3 — The Marketplace as a Payment Platform",
+      "avatar": "videos/Slide_12.mp4",
+      "main": { "type": "image", "src": "slides/12.jpg" }
+    },
+    {
+      "id": "13",
+      "group": "12",
+      "title": "How Transactions Flow Through AWS",
+      "avatar": "videos/Slide_13.mp4",
+      "main": { "type": "image", "src": "slides/13.jpg" }
+    },
+    {
+      "id": "14",
+      "group": "12",
+      "title": "Consolidating Procurement & Time-to-Value",
+      "avatar": "videos/Slide_14.mp4",
+      "main": { "type": "image", "src": "slides/14.jpg" }
+    },
+    {
+      "id": "15",
+      "group": "12",
+      "title": "Retiring Cloud Commitments via Marketplace",
+      "avatar": "videos/Slide_15.mp4",
+      "main": { "type": "image", "src": "slides/15.jpg" }
+    },
+    {
+      "id": "16",
+      "group": "12",
+      "title": "Predictive Analysis — Bypassing Procurement Friction",
+      "avatar": "videos/Slide_16.mp4",
+      "main": { "type": "image", "src": "slides/16.jpg" }
+    },
+    {
+      "id": "17",
+      "group": "12",
+      "title": "Internal Policy & Listing-Fee Mechanics",
+      "avatar": "videos/Slide_17.mp4",
+      "main": { "type": "image", "src": "slides/17.jpg" }
+    },
+    {
+      "id": "18",
+      "group": "18",
+      "title": "Module 4 — The $60B Co-Selling Opportunity",
+      "avatar": "videos/Slide_18.mp4",
+      "main": { "type": "image", "src": "slides/18.jpg" }
+    },
+    {
+      "id": "19",
+      "group": "18",
+      "title": "Bridging the Marketing-to-Finance Gap",
+      "avatar": "videos/Slide_19.mp4",
+      "main": { "type": "image", "src": "slides/19.jpg" }
+    },
+    {
+      "id": "20",
+      "group": "18",
+      "title": "Speed & Procedural Execution",
+      "avatar": "videos/Slide_20.mp4",
+      "main": { "type": "image", "src": "slides/20.jpg" }
+    },
+    {
+      "id": "21",
+      "group": "18",
+      "title": "Engaging AWS Early & Pitching the Mechanics",
+      "avatar": "videos/Slide_21.mp4",
+      "main": { "type": "image", "src": "slides/21.jpg" }
+    },
+    {
+      "id": "22",
+      "group": "18",
+      "title": "Turning Roadblocks into Sales Champions",
+      "avatar": "videos/Slide_22.mp4",
+      "main": { "type": "image", "src": "slides/22.jpg" }
+    },
+    {
+      "id": "23",
+      "group": "23",
+      "title": "Self-Assessment — Mapping Your Top Three Accounts",
+      "avatar": "videos/Slide_23.mp4",
+      "main": { "type": "image", "src": "slides/23.jpg" }
+    }
+  ]
+}

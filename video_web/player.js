@@ -37,6 +37,7 @@
   let frameOffsets = [];      // precomputed start times in seconds
   let currentFrameIdx = 0;
   let slideDurations = [];    // duration (seconds) per slide index, null until loaded
+  let pendingAdvance = null;  // setTimeout id for the post-slide auto-advance
   let activeTrack = null;     // current VTT TextTrack
 
   // ── Init ───────────────────────────────────────────────────
@@ -175,8 +176,13 @@
 
   // ── Load slide ─────────────────────────────────────────────
   function loadSlide(index, autoplay) {
+    if (pendingAdvance) { clearTimeout(pendingAdvance); pendingAdvance = null; }
     doPause(); // Force stop to avoid audio overlap
     clearSubtitles();
+
+    progressFill.style.width = '0%';
+    progressThumb.style.left = '0%';
+    timeDisplay.textContent = '0:00 / 0:00';
 
     currentIndex = index;
     const slide = course.slides[index];
@@ -215,10 +221,12 @@
         avatarVideo.src = '';
         avatarVideo.classList.add('blank');
       } else {
+        // Append <track> BEFORE assigning src so the browser binds it
+        // when it starts loading the new video.
+        loadSubtitles(slide.avatar, avatarVideo);
         avatarVideo.src = slide.avatar || '';
         avatarVideo.load();
         avatarVideo.classList.toggle('blank', currentType === 'video');
-        loadSubtitles(slide.avatar, avatarVideo);
       }
 
       // ── Main content ──
@@ -229,12 +237,12 @@
         mainVideo.classList.remove('hidden');
         mainImage.classList.add('hidden');
       } else if (currentType === 'avatar') {
+        loadSubtitles(slide.avatar, mainVideo);
         mainVideo.src = slide.avatar || '';
         mainVideo.muted = false;
         mainVideo.load();
         mainVideo.classList.remove('hidden');
         mainImage.classList.add('hidden');
-        loadSubtitles(slide.avatar, mainVideo);
       } else {
         mainVideo.classList.add('hidden');
         mainImage.classList.remove('hidden');
@@ -243,22 +251,44 @@
     }
 
     if (autoplay !== false) {
-      doPlay();
+      doPlay(true); // fresh slide — start from 0
     }
   }
 
   // ── Playback ───────────────────────────────────────────────
-  function doPlay() {
+  // Always call play() immediately so the browser starts buffering. For a
+  // fresh slide load, anchor currentTime to 0 (now and again on metadata load)
+  // to avoid the phantom-playback drift that happens when play() races with
+  // a freshly-set src. If play() rejects (load race), retry once the element
+  // is ready. `resetTime` should be true on a fresh slide load and false when
+  // resuming after a manual pause.
+  function safePlay(vid, resetTime) {
+    if (resetTime) {
+      try { vid.currentTime = 0; } catch (e) { /* may throw if not seekable yet */ }
+      vid.addEventListener('loadedmetadata', function reset() {
+        try { vid.currentTime = 0; } catch (e) { }
+      }, { once: true });
+    }
+    paintBar(vid);
+    const p = vid.play();
+    if (p) p.catch(function () {
+      const retry = function () {
+        const r = vid.play();
+        if (r) r.catch(() => { });
+      };
+      vid.addEventListener('canplay', retry, { once: true });
+      vid.addEventListener('loadeddata', retry, { once: true });
+    });
+  }
+
+  function doPlay(resetTime) {
     if (currentType === 'avatar') {
       // Avatar plays fullscreen in main area — only mainVideo runs
-      const p = mainVideo.play();
-      if (p) p.catch(() => { });
+      safePlay(mainVideo, resetTime);
     } else {
-      const p1 = avatarVideo.play();
-      if (p1) p1.catch(() => { });
+      safePlay(avatarVideo, resetTime);
       if (currentType === 'video') {
-        const p2 = mainVideo.play();
-        if (p2) p2.catch(() => { });
+        safePlay(mainVideo, resetTime);
       }
     }
     isPlaying = true;
@@ -274,7 +304,7 @@
 
   function togglePlayPause() {
     if (isPlaying) doPause();
-    else doPlay();
+    else doPlay(false); // resume from current position
   }
 
   function updatePlayBtn() {
@@ -287,6 +317,33 @@
   avatarVideo.addEventListener('pause', () => { if (currentType !== 'avatar') { isPlaying = false; updatePlayBtn(); } });
   mainVideo.addEventListener('play', () => { if (currentType === 'avatar') { isPlaying = true; updatePlayBtn(); } });
   mainVideo.addEventListener('pause', () => { if (currentType === 'avatar') { isPlaying = false; updatePlayBtn(); } });
+
+  // Drive the progress bar directly from each video's timeupdate / loadedmetadata.
+  // This is more reliable than the rAF guard, which can miss updates when
+  // currentType is briefly stale during slide transitions.
+  function paintBar(vid) {
+    if (!vid.duration || isNaN(vid.duration)) return;
+    const rawPct = (vid.currentTime / vid.duration) * 100;
+    // Floor at a minimum visible width once playback has started, so slow-
+    // growing progress on long slides is still perceptible from the first
+    // second instead of looking like an empty bar.
+    let pct = rawPct;
+    if (vid.currentTime > 0) {
+      const trackW = progressTrack.offsetWidth || 1;
+      const minPct = (6 / trackW) * 100;
+      if (pct < minPct) pct = minPct;
+    }
+    progressFill.style.width = pct + '%';
+    progressThumb.style.left = pct + '%';
+    timeDisplay.textContent = fmtTime(vid.currentTime) + ' / ' + fmtTime(vid.duration);
+  }
+  function isActiveVid(vid) {
+    return vid === (currentType === 'avatar' ? mainVideo : avatarVideo);
+  }
+  ['timeupdate', 'loadedmetadata', 'durationchange', 'seeked', 'play', 'playing', 'progress'].forEach(function (evt) {
+    avatarVideo.addEventListener(evt, function () { if (isActiveVid(avatarVideo)) paintBar(avatarVideo); });
+    mainVideo.addEventListener(evt, function () { if (isActiveVid(mainVideo)) paintBar(mainVideo); });
+  });
 
   // ── Auto-advance ────────────────────────────────────────────
   function onSlideEnded() {
@@ -306,7 +363,10 @@
         });
       return;
     }
-    loadSlide(currentIndex + 1, true);
+    pendingAdvance = setTimeout(function () {
+      pendingAdvance = null;
+      loadSlide(currentIndex + 1, true);
+    }, 2000);
   }
 
   avatarVideo.addEventListener('ended', function () {
@@ -320,12 +380,7 @@
   // ── Progress loop (rAF) ─────────────────────────────────────
   function progressLoop() {
     const timeVid = currentType === 'avatar' ? mainVideo : avatarVideo;
-    if (!timeVid.paused && timeVid.duration) {
-      const pct = (timeVid.currentTime / timeVid.duration) * 100;
-      progressFill.style.width = pct + '%';
-      progressThumb.style.left = pct + '%';
-      timeDisplay.textContent = fmtTime(timeVid.currentTime) + ' / ' + fmtTime(timeVid.duration);
-    }
+    if (timeVid.duration) paintBar(timeVid);
 
     // ── Global course progress ──
     const allLoaded = slideDurations.every(function (d) { return d !== null; });
@@ -473,33 +528,17 @@
     track.default = true;
     videoEl.appendChild(track);
 
-    function activateTrack() {
-      if (activeTrack) return; // already activated
-      if (track.track) {
-        activeTrack = track.track;
-        activeTrack.mode = 'hidden'; // we render manually, not browser default
-        activeTrack.addEventListener('cuechange', onCueChange);
-        // Manually trigger a cue check in case we missed the first cuechange
-        onCueChange();
-      }
+    // track.track is available synchronously after append. Setting mode to
+    // 'hidden' forces the browser to begin fetching the .vtt immediately
+    // (without it, some browsers defer loading).
+    if (track.track) {
+      activeTrack = track.track;
+      activeTrack.mode = 'hidden';
+      activeTrack.addEventListener('cuechange', onCueChange);
     }
 
-    // Try to activate on load event
-    track.addEventListener('load', activateTrack);
-
-    // Retry polling — track may not be ready immediately
-    let retries = 0;
-    subtitlePollId = setInterval(function () {
-      retries++;
-      if (track.track && track.track.cues && track.track.cues.length > 0) {
-        clearInterval(subtitlePollId);
-        subtitlePollId = null;
-        activateTrack();
-      } else if (retries > 25) {
-        clearInterval(subtitlePollId); // give up after 5 seconds
-        subtitlePollId = null;
-      }
-    }, 200);
+    // The .vtt arrives async; force a first paint as soon as it's parsed.
+    track.addEventListener('load', onCueChange);
   }
 
   function onCueChange() {
