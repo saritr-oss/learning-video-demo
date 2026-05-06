@@ -105,6 +105,12 @@
       "title": "Conclusion — Building a Leadership Philosophy",
       "avatar": "videos/Slide_15.mp4",
       "main": { "type": "image", "src": "slides/15.jpg" }
+    },
+    {
+      "id": "16",
+      "group": "16",
+      "title": "Course Complete",
+      "avatar": "videos/Slide_16.mp4"
     }
   ]
 }

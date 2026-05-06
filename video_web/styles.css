@@ -368,6 +368,7 @@ li.active .nav-title {
   background: var(--surface);
   overflow: hidden;
   min-height: 0;
+  padding: 0 10px;
 }
 
 #main-video,
