@@ -348,13 +348,17 @@
   // ── Auto-advance ────────────────────────────────────────────
   function onSlideEnded() {
     if (currentIndex >= course.slides.length - 1) {
-      // Last slide ended — check if a quiz exists for this persona before navigating
+      // Last slide ended — check if a quiz exists, then wait 5s before
+      // navigating so the completion message has a moment to land.
       const persona = new URLSearchParams(window.location.search).get('persona') || '';
       if (!persona) return; // no persona, stay put
       fetch(persona + '/quiz.json', { method: 'HEAD' })
         .then(function (r) {
           if (r.ok) {
-            window.location.href = 'quiz.html?persona=' + encodeURIComponent(persona);
+            pendingAdvance = setTimeout(function () {
+              pendingAdvance = null;
+              window.location.href = 'quiz.html?persona=' + encodeURIComponent(persona);
+            }, 5000);
           }
           // no quiz file — stay on the last slide
         })

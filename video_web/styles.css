@@ -203,7 +203,7 @@ body {
 /* ── Avatar slot ── */
 #avatar-slot {
   width: 100%;
-  background: #000;
+  background: var(--surface);
   flex-shrink: 0;
   position: relative;
   border-bottom: 1px solid var(--border);
@@ -365,7 +365,7 @@ li.active .nav-title {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #000;
+  background: var(--surface);
   overflow: hidden;
   min-height: 0;
 }
@@ -397,7 +397,7 @@ li.active .nav-title {
   font-weight: 500;
   line-height: 1.5;
   padding: 12px 24px;
-  background: rgba(0, 0, 0, 0.85);
+  background: var(--surface);
   border-top: 1px solid var(--border);
   pointer-events: none;
   letter-spacing: 0.02em;
