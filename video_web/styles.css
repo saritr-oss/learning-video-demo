@@ -388,7 +388,7 @@ li.active .nav-title {
 /* ── Subtitle area (reserved space below the image) ── */
 #subtitle-overlay {
   flex-shrink: 0;
-  min-height: 72px;
+  height: 96px;
   display: flex;
   align-items: center;
   justify-content: center;

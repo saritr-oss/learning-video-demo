@@ -4,6 +4,27 @@ import urllib.parse
 import os
 import http.cookies
 
+
+class _LimitedFile:
+    """Wrap a file so reads cap at `length` bytes — used for Range responses
+    so the SimpleHTTPRequestHandler.copyfile loop stops at the right place."""
+
+    def __init__(self, f, length):
+        self.f = f
+        self.remaining = length
+
+    def read(self, size=-1):
+        if self.remaining <= 0:
+            return b""
+        if size < 0 or size > self.remaining:
+            size = self.remaining
+        data = self.f.read(size)
+        self.remaining -= len(data)
+        return data
+
+    def close(self):
+        return self.f.close()
+
 # Parse .env file manually so we don't strictly require 'python-dotenv' package
 def load_env():
     env_path = os.path.join(os.path.dirname(__file__), '.env')
@@ -75,6 +96,55 @@ def render_cards(tenant):
 
 
 class AuthHandler(http.server.SimpleHTTPRequestHandler):
+    def send_head(self):
+        # Only intercept when a Range was requested (typical for video streaming);
+        # otherwise fall through to the parent's behaviour.
+        range_header = self.headers.get("Range")
+        if not range_header:
+            return super().send_head()
+
+        path = self.translate_path(self.path)
+        if os.path.isdir(path):
+            return super().send_head()
+
+        try:
+            f = open(path, "rb")
+        except OSError:
+            self.send_error(404, "File not found")
+            return None
+
+        try:
+            fs = os.fstat(f.fileno())
+            size = fs.st_size
+            unit, _, ranges = range_header.partition("=")
+            if unit.strip().lower() != "bytes":
+                raise ValueError("only byte ranges supported")
+            start_str, _, end_str = ranges.partition("-")
+            start = int(start_str) if start_str else 0
+            end = int(end_str) if end_str else size - 1
+            if end >= size:
+                end = size - 1
+            if start < 0 or start > end:
+                raise ValueError("invalid range")
+        except ValueError:
+            f.close()
+            self.send_response(416, "Range Not Satisfiable")
+            self.send_header("Content-Range", f"bytes */{size if 'size' in dir() else 0}")
+            self.end_headers()
+            return None
+
+        length = end - start + 1
+        f.seek(start)
+
+        self.send_response(206, "Partial Content")
+        self.send_header("Content-Type", self.guess_type(path))
+        self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
+        self.send_header("Content-Length", str(length))
+        self.send_header("Accept-Ranges", "bytes")
+        self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
+        self.end_headers()
+        return _LimitedFile(f, length)
+
     def handle_one_request(self):
         # Browsers routinely drop video range requests when the user
         # navigates between slides. Swallow the resulting socket errors

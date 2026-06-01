@@ -358,7 +358,7 @@
             pendingAdvance = setTimeout(function () {
               pendingAdvance = null;
               window.location.href = 'quiz.html?persona=' + encodeURIComponent(persona);
-            }, 5000);
+            }, 2000);
           }
           // no quiz file — stay on the last slide
         })
@@ -370,7 +370,7 @@
     pendingAdvance = setTimeout(function () {
       pendingAdvance = null;
       loadSlide(currentIndex + 1, true);
-    }, 2000);
+    }, 1000);
   }
 
   avatarVideo.addEventListener('ended', function () {
@@ -528,7 +528,9 @@
     track.kind = 'subtitles';
     track.label = 'English';
     track.srclang = 'en';
-    track.src = vttSrc;
+    // Cache-bust: <track> elements are aggressively cached and ignore normal
+    // hard-reload, so append a per-load query so the VTT is always re-fetched.
+    track.src = vttSrc + '?v=' + Date.now();
     track.default = true;
     videoEl.appendChild(track);
 

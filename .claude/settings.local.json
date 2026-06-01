@@ -9,7 +9,10 @@
       "Read(//Users/gilrubin/dev/Paidevo-questionnaire/frontend/src/pages/**)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:docs.heygen.com)",
+      "WebFetch(domain:developers.heygen.com)",
+      "WebFetch(domain:www.google.com)"
     ]
   }
 }

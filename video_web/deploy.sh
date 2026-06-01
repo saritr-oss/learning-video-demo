@@ -39,6 +39,8 @@ USER1_NAME: ${USER1_NAME}
 USER1_PASS: ${USER1_PASS}
 USER2_NAME: ${USER2_NAME}
 USER2_PASS: ${USER2_PASS}
+USER3_NAME: ${USER3_NAME}
+USER3_PASS: ${USER3_PASS}
 EOF
 
 echo "Created temporary environment file: ${ENV_FILE}"
@@ -58,8 +60,8 @@ gcloud run deploy "${SERVICE_NAME}" \
     --source . \
     --region "${REGION}" \
     --min-instances 1 \
-    --max-instances 3 \
-    --memory 256Mi \
+    --max-instances 1 \
+    --memory 1Gi \
     --allow-unauthenticated \
     --env-vars-file "${ENV_FILE}"
 
